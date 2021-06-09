@@ -127,7 +127,7 @@
   syntax enable
   set t_ti=
   set t_te=
-  set t_Co=256           " number of supported colors
+  "set t_Co=256           " number of supported colors
   set autoread           " Automatically reload changes if detected
   set wildmenu           " Turn on WiLd menu
   set hidden             " Change buffer - without saving
@@ -424,13 +424,9 @@
   "}}}
 
   Plug 'camspiers/lens.vim' "{{{
-    " for animation
-    " Plug 'camspiers/animate.vim'
-
     " let g:lens#disabled = 1
-    " let g:lens#animate = 0
+    let g:lens#animate = 0
     let g:lens#disabled_filetypes = ['nerdtree', 'fzf']
-
     " let g:lens#height_resize_max = 20
     " let g:lens#height_resize_min = 5
     " let g:lens#width_resize_max = 80
@@ -461,27 +457,24 @@
 "}}}
 
 " colorschemes {{{
-  Plug 'mhartington/oceanic-next'   " OceanicNext; airline: oceanicnext
-  Plug 'joshdick/onedark.vim'       " onedark; +airline
-  Plug 'cocopon/iceberg.vim'        " iceberg; +airline
+  Plug 'mhartington/oceanic-next'                     " OceanicNext; airline: oceanicnext
+  Plug 'joshdick/onedark.vim'                         " onedark; +airline
+  Plug 'cocopon/iceberg.vim'                          " iceberg; +airline
   Plug 'dracula/vim'
   Plug 'tomasr/molokai'
-  Plug 'w0ng/vim-hybrid' " hybrid
+  Plug 'w0ng/vim-hybrid'                              " hybrid
   Plug 'wolf-dog/nighted.vim'
-  Plug 'croaker/mustang-vim' " mustang
-  Plug 'romainl/Apprentice' " apprentice
-  Plug 'jacoborus/tender.vim' "tender
-  Plug 'gosukiwi/vim-atom-dark' " atom-dark
-  Plug 'noahfrederick/vim-hemisu' " hemisu
+  Plug 'croaker/mustang-vim'                          " mustang
+  Plug 'romainl/Apprentice'                           " apprentice
+  Plug 'jacoborus/tender.vim'                         "tender
+  Plug 'gosukiwi/vim-atom-dark'                       " atom-dark
+  Plug 'noahfrederick/vim-hemisu'                     " hemisu
   Plug 'danilo-augusto/vim-afterglow'
-  Plug 'arcticicestudio/nord-vim'  " nord
-  Plug 'altercation/vim-colors-solarized' " solarized
-  Plug 'kristijanhusak/vim-hybrid-material' " hybrid*
+  Plug 'arcticicestudio/nord-vim'                     " nord
+  Plug 'altercation/vim-colors-solarized'             " solarized
+  Plug 'kristijanhusak/vim-hybrid-material'           " hybrid*
   Plug 'sainnhe/gruvbox-material'
   Plug 'sainnhe/sonokai'
-  Plug 'nanotech/jellybeans.vim' "{{{
-    "let g:jellybeans_use_lowcolor_black = 0
-  "}}}
 " }}}
 
 " disctraction-free writing {{{
@@ -533,7 +526,7 @@ require('nvim-treesitter.configs').setup {
 
 local cb = require('diffview.config').diffview_callback
 
-require'diffview'.setup {
+require('diffview').setup {
   diff_binaries = false,    -- Show diffs for binaries
   file_panel = {
     width = 35,
@@ -635,6 +628,21 @@ EOF
     " colorscheme mustang
     " colorscheme molokai
   endif
+" }}}
+
+" whitespace handling {{{
+  highlight ExtraWhitespace ctermbg=red guibg=red
+  match ExtraWhitespace /\s\+$/
+  autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+  autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+  autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+  autocmd BufWinLeave * call clearmatches()
+
+  function! TrimWhiteSpace()
+    %s/\s\+$//e
+  endfunction
+  "autocmd BufWritePre *.rb :call TrimWhiteSpace()
+  autocmd BufWritePre * undojoin | :call TrimWhiteSpace()
 " }}}
 
 " enjoy.
