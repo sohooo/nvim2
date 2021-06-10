@@ -173,7 +173,7 @@
   let mapleader=","
   nmap <silent> <leader>s :set spell!<CR>
   nmap <silent> <leader>vim :e <sfile><CR>
-  nmap <leader>u :syntax sync fromstart<cr>:redraw!<cr>
+  nmap <leader>r :syntax sync fromstart<cr>:redraw!<cr>
 
   " jenkins pipeline linting for .groovy files
   au FileType groovy nmap <leader>l :!ssh -l $GIT_AUTHOR_NAME -p 58888 JENKINS_HOST declarative-linter < %<cr>
@@ -211,7 +211,7 @@
   nnoremap g, g,zz
 
   " remove current search highlighting
-  nnoremap <nowait><silent> <C-L> :noh<CR>
+  nnoremap <space>l :noh<cr>
 
   " toggle paste mode on/off
   map <F9> :set paste!<cr>:set paste?<cr>
@@ -382,21 +382,6 @@
     nnoremap <leader>d :NvimTreeToggle<CR>
   "}}}
 
-  "Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' } "{{{
-  "Plug 'jistr/vim-nerdtree-tabs'
-  "Plug 'Xuyuanp/nerdtree-git-plugin'
-  "  let NERDTreeChDirMode=0
-  "  let NERDTreeDirArrows=1
-  "  let NERDTreeHighlightCursorline=1
-  "  let NERDTreeIgnore=['\.git$','\.hg']
-  "  let g:NERDTreeMinimalUI=1
-  "  let NERDTreeQuitOnOpen=0
-  "  let NERDTreeShowBookmarks=0
-  "  let NERDTreeShowHidden=1
-  "  let NERDTreeShowLineNumbers=0
-  "  nnoremap <leader>d :NERDTreeToggle<CR>
-  ""}}}
-
   Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' } "{{{
     let g:undotree_SplitLocation='botright'
     let g:undotree_SetFocusWhenToggle=1
@@ -469,22 +454,12 @@
 "}}}
 
 " colorschemes {{{
-  Plug 'mhartington/oceanic-next'                     " OceanicNext; airline: oceanicnext
-  Plug 'joshdick/onedark.vim'                         " onedark; +airline
-  Plug 'cocopon/iceberg.vim'                          " iceberg; +airline
-  Plug 'dracula/vim'
-  Plug 'tomasr/molokai'
+  Plug 'cocopon/iceberg.vim'                          " iceberg
   Plug 'w0ng/vim-hybrid'                              " hybrid
-  Plug 'wolf-dog/nighted.vim'
-  Plug 'croaker/mustang-vim'                          " mustang
-  Plug 'romainl/Apprentice'                           " apprentice
-  Plug 'jacoborus/tender.vim'                         "tender
-  Plug 'gosukiwi/vim-atom-dark'                       " atom-dark
-  Plug 'noahfrederick/vim-hemisu'                     " hemisu
+  Plug 'jacoborus/tender.vim'                         " tender
+  Plug 'gosukiwi/vim-atom-dark'                       " atom-dark-256
   Plug 'danilo-augusto/vim-afterglow'
-  Plug 'arcticicestudio/nord-vim'                     " nord
-  Plug 'altercation/vim-colors-solarized'             " solarized
-  Plug 'kristijanhusak/vim-hybrid-material'           " hybrid*
+  Plug 'kristijanhusak/vim-hybrid-material'           " hybrid_material
   Plug 'sainnhe/gruvbox-material'
   Plug 'sainnhe/sonokai'
 " }}}
@@ -613,16 +588,13 @@ EOF
     if $TERM == 'xterm-256color'
       colorscheme iceberg
       " colorscheme hybrid
+      " colorscheme hybrid_material
     else
       let g:CSApprox_verbose_level=0
       colorscheme slate
     endif
   else
     colorscheme iceberg
-    " colorscheme hybrid
-    " colorscheme solarized
-    " colorscheme mustang
-    " colorscheme molokai
   endif
 
   " colorize lsp diag messages
