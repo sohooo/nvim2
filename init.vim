@@ -547,7 +547,7 @@ require("trouble").setup {
       hint = "hint",
       information = "info"
   },
-  use_lsp_diagnostic_signs = true -- enabling this will use the signs defined in your lsp client
+  use_lsp_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
 }
 
 -- ruby/solargraph
@@ -561,7 +561,7 @@ require('lspconfig').solargraph.setup {
       hover = true,
       logLevel = "warn",
       rename = true,
-      symbols = false
+      symbols = true,
     }
   }
 }
@@ -571,11 +571,20 @@ require('lspconfig').solargraph.setup {
 -- hide diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = false
+    virtual_text = false,
+    underline = false,
+    signs = true,
   }
 )
 
-require('lspsaga').init_lsp_saga()
+-- require('lspsaga').init_lsp_saga()
+require('lspsaga').init_lsp_saga {
+    -- override ugly vim.lsp arrow icon
+    error_sign = '', -- 
+    warn_sign = '',
+    hint_sign = '',
+    infor_sign = '',
+}
 
 EOF
 " }}}
@@ -603,6 +612,10 @@ EOF
   highlight LspDiagnosticsDefaultInformation ctermfg=blue guifg=red
   highlight LspDiagnosticsDefaultHint ctermfg=grey guifg=red
 " }}}
+"
+  " autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+  " autocmd CursorHold * :Lspsaga show_line_diagnostics
+  " autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()
 
 " whitespace handling {{{
   highlight ExtraWhitespace ctermbg=red guibg=red
