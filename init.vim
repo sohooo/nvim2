@@ -210,6 +210,9 @@
   nnoremap g; g;zz
   nnoremap g, g,zz
 
+  " remove current search highlighting
+  nnoremap <nowait><silent> <C-L> :noh<CR>
+
   " toggle paste mode on/off
   map <F9> :set paste!<cr>:set paste?<cr>
   " toggle line numbers
@@ -341,7 +344,6 @@
   Plug 'windwp/nvim-autopairs' "autopairs for neovim written by lua
   Plug 'tversteeg/registers.nvim' "NeoVim plugin to preview the contents of the registers
   Plug 'justinmk/vim-sneak' "The missing motion for Vim 👟
-  Plug 'tpope/vim-sensible' "Defaults everyone can agree on
   Plug 'tpope/vim-surround' "quoting/parenthesizing made simple
   Plug 'tpope/vim-repeat' "enable repeating supported plugin maps with .
   Plug 'tpope/vim-endwise' "wisely add end in ruby, endfunction/endif/more in vim script, etc
