@@ -378,20 +378,24 @@
     nnoremap <leader>c :DiffviewOpen<CR>
   "}}}
 
-  Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' } "{{{
-  Plug 'jistr/vim-nerdtree-tabs'
-  Plug 'Xuyuanp/nerdtree-git-plugin'
-    let NERDTreeChDirMode=0
-    let NERDTreeDirArrows=1
-    let NERDTreeHighlightCursorline=1
-    let NERDTreeIgnore=['\.git$','\.hg']
-    let g:NERDTreeMinimalUI=1
-    let NERDTreeQuitOnOpen=0
-    let NERDTreeShowBookmarks=0
-    let NERDTreeShowHidden=1
-    let NERDTreeShowLineNumbers=0
-    nnoremap <leader>d :NERDTreeToggle<CR>
+  Plug 'kyazdani42/nvim-tree.lua', { 'on': 'NvimTreeToggle' } "{{{
+    nnoremap <leader>d :NvimTreeToggle<CR>
   "}}}
+
+  "Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' } "{{{
+  "Plug 'jistr/vim-nerdtree-tabs'
+  "Plug 'Xuyuanp/nerdtree-git-plugin'
+  "  let NERDTreeChDirMode=0
+  "  let NERDTreeDirArrows=1
+  "  let NERDTreeHighlightCursorline=1
+  "  let NERDTreeIgnore=['\.git$','\.hg']
+  "  let g:NERDTreeMinimalUI=1
+  "  let NERDTreeQuitOnOpen=0
+  "  let NERDTreeShowBookmarks=0
+  "  let NERDTreeShowHidden=1
+  "  let NERDTreeShowLineNumbers=0
+  "  nnoremap <leader>d :NERDTreeToggle<CR>
+  ""}}}
 
   Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' } "{{{
     let g:undotree_SplitLocation='botright'
@@ -412,10 +416,10 @@
 "}}}
 
 " visuals {{{
-  Plug 'ryanoasis/vim-devicons'
-  "Plug 'kyazdani42/nvim-web-devicons' "lua fork of vim-web-devicons for neovim; no hook for nerdtree
+  Plug 'airblade/vim-gitgutter'
+  " Plug 'ryanoasis/vim-devicons'
+  Plug 'kyazdani42/nvim-web-devicons' "lua fork of vim-web-devicons for neovim; no hook for nerdtree
   Plug 'p00f/nvim-ts-rainbow' "🌈 Rainbow parentheses for neovim using tree-sitter
-  Plug 'lewis6991/gitsigns.nvim' "Git signs written in pure lua
   Plug 'kshenoy/vim-signature' "Plugin to toggle, display and navigate marks
   Plug 'dstein64/nvim-scrollview' "A Neovim plugin that displays interactive scrollbars.
   Plug 'folke/lsp-colors.nvim'
@@ -551,7 +555,6 @@ require('nvim-treesitter.configs').setup {
 }
 
 require('nvim-autopairs').setup()
-require('gitsigns').setup()
 require('todo-comments').setup {
   signs = true
 }
@@ -561,7 +564,7 @@ require("trouble").setup {
   fold_open = "v", -- icon used for open folds
   fold_closed = ">", -- icon used for closed folds
   indent_lines = false, -- add an indent guide below the fold icons
-  icons = false, -- requires nvim-web-devicons
+  icons = true, -- requires nvim-web-devicons
   signs = {
       -- icons / text used for a diagnostic
       error = "error",
@@ -569,7 +572,7 @@ require("trouble").setup {
       hint = "hint",
       information = "info"
   },
-  use_lsp_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
+  use_lsp_diagnostic_signs = true -- enabling this will use the signs defined in your lsp client
 }
 
 -- ruby/solargraph
