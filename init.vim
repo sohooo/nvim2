@@ -421,7 +421,6 @@
   Plug 'kyazdani42/nvim-web-devicons' "lua fork of vim-web-devicons for neovim; no hook for nerdtree
   Plug 'p00f/nvim-ts-rainbow' "🌈 Rainbow parentheses for neovim using tree-sitter
   Plug 'kshenoy/vim-signature' "Plugin to toggle, display and navigate marks
-  Plug 'dstein64/nvim-scrollview' "A Neovim plugin that displays interactive scrollbars.
   Plug 'folke/lsp-colors.nvim'
 
   Plug 'vim-airline/vim-airline' "{{{
@@ -448,6 +447,7 @@
 "}}}
 
 " disabled for now {{{
+  " Plug 'dstein64/nvim-scrollview' "A Neovim plugin that displays interactive scrollbars.
   " Plug 'npxbr/glow.nvim' "A markdown preview directly in your neovim.
   " Plug 'nvim-telescope/telescope-project.nvim'
   " Plug 'fhill2/telescope-ultisnips.nvim'
