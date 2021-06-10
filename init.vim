@@ -264,13 +264,14 @@
 	Plug 'neovim/nvim-lspconfig'
   Plug 'glepnir/lspsaga.nvim' "{{{
     nnoremap <silent>gh :Lspsaga lsp_finder<CR>
-    nnoremap <silent><leader>ca :Lspsaga code_action<CR>
-    vnoremap <silent><leader>ca :<C-U>Lspsaga range_code_action<CR>
     nnoremap <silent>K :Lspsaga hover_doc<CR>
-    nnoremap <silent>gs :Lspsaga signature_help<CR>
     nnoremap <silent>gr :Lspsaga rename<CR>
     nnoremap <silent>gd :Lspsaga preview_definition<CR>
     nnoremap <silent> <leader>cd :Lspsaga show_line_diagnostics<CR>
+
+    nnoremap <silent><leader>ca :Lspsaga code_action<CR>
+    vnoremap <silent><leader>ca :<C-U>Lspsaga range_code_action<CR>
+    nnoremap <silent>gs :Lspsaga signature_help<CR>
   "}}}
 " }}}
 
@@ -366,7 +367,7 @@
   Plug 'jeffkreeftmeijer/vim-numbertoggle' "Toggles between hybrid and absolute line numbers automatically
   Plug 'christoomey/vim-tmux-navigator' "Seamless navigation between tmux panes and vim splits
 
-  Plug 'sindrets/diffview.nvim' "{{{
+  Plug 'sindrets/diffview.nvim', { 'on': 'DiffviewOpen' } "{{{
     "Single tabpage interface to easily cycle through diffs for all modified files for any git rev.
     nnoremap <leader>c :DiffviewOpen<CR>
   "}}}
@@ -405,7 +406,8 @@
 "}}}
 
 " visuals {{{
-  Plug 'kyazdani42/nvim-web-devicons' "lua fork of vim-web-devicons for neovim
+  Plug 'ryanoasis/vim-devicons'
+  "Plug 'kyazdani42/nvim-web-devicons' "lua fork of vim-web-devicons for neovim; no hook for nerdtree
   Plug 'p00f/nvim-ts-rainbow' "🌈 Rainbow parentheses for neovim using tree-sitter
   Plug 'lewis6991/gitsigns.nvim' "Git signs written in pure lua
   Plug 'kshenoy/vim-signature' "Plugin to toggle, display and navigate marks
@@ -512,6 +514,7 @@ syntax enable
 
 " lua config {{{
 lua << EOF
+
 -- nvim-treesitter, nvim-ts-rainbow
 require('nvim-treesitter.configs').setup {
   highlight = {
@@ -523,40 +526,6 @@ require('nvim-treesitter.configs').setup {
     max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
   }
 }
-
-local cb = require('diffview.config').diffview_callback
-
-require('diffview').setup {
-  diff_binaries = false,    -- Show diffs for binaries
-  file_panel = {
-    width = 35,
-    use_icons = false        -- Requires nvim-web-devicons
-  },
-  key_bindings = {
-    -- The `view` bindings are active in the diff buffers, only when the current
-    -- tabpage is a Diffview.
-    view = {
-      ["<tab>"]     = cb("select_next_entry"),  -- Open the diff for the next file 
-      ["<s-tab>"]   = cb("select_prev_entry"),  -- Open the diff for the previous file
-      ["<leader>e"] = cb("focus_files"),        -- Bring focus to the files panel
-      ["<leader>b"] = cb("toggle_files"),       -- Toggle the files panel.
-    },
-    file_panel = {
-      ["j"]         = cb("next_entry"),         -- Bring the cursor to the next file entry
-      ["<down>"]    = cb("next_entry"),
-      ["k"]         = cb("prev_entry"),         -- Bring the cursor to the previous file entry.
-      ["<up>"]      = cb("prev_entry"),
-      ["<cr>"]      = cb("select_entry"),       -- Open the diff for the selected entry.
-      ["o"]         = cb("select_entry"),
-      ["R"]         = cb("refresh_files"),      -- Update stats and entries in the file list.
-      ["<tab>"]     = cb("select_next_entry"),
-      ["<s-tab>"]   = cb("select_prev_entry"),
-      ["<leader>e"] = cb("focus_files"),
-      ["<leader>b"] = cb("toggle_files"),
-    }
-  }
-}
-
 
 require('nvim-autopairs').setup()
 require('gitsigns').setup()
@@ -582,19 +551,19 @@ require("trouble").setup {
 
 -- ruby/solargraph
 -- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#solargraph
--- require('lspconfig').solargraph.setup {
-  --settings = {
-  --  solargraph = {
-  --    autoformat = true,
-  --    formatting = true,
-  --    definitions = true,
-  --    hover = true,
-  --    logLevel = "warn",
-  --    rename = true,
-  --    symbols = false
-  --  }
-  --}
--- }
+require('lspconfig').solargraph.setup {
+  settings = {
+    solargraph = {
+      autoformat = true,
+      formatting = true,
+      definitions = true,
+      hover = true,
+      logLevel = "warn",
+      rename = true,
+      symbols = false
+    }
+  }
+}
 
 -- disable diagnostics
 --vim.lsp.handlers["textDocument/publishDiagnostics"] = function() end
@@ -604,6 +573,7 @@ require("trouble").setup {
 --     virtual_text = false
 --   }
 -- )
+
 require('lspsaga').init_lsp_saga()
 
 EOF
@@ -628,12 +598,18 @@ EOF
     " colorscheme mustang
     " colorscheme molokai
   endif
+
+  " colorize lsp diag messages
+  highlight LspDiagnosticsDefaultError ctermfg=red guifg=red
+  highlight LspDiagnosticsDefaultWarning ctermfg=yellow guifg=red
+  highlight LspDiagnosticsDefaultInformation ctermfg=blue guifg=red
+  highlight LspDiagnosticsDefaultHint ctermfg=grey guifg=red
 " }}}
 
 " whitespace handling {{{
   highlight ExtraWhitespace ctermbg=red guibg=red
   match ExtraWhitespace /\s\+$/
-  autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+  " autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
   autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
   autocmd InsertLeave * match ExtraWhitespace /\s\+$/
   autocmd BufWinLeave * call clearmatches()
