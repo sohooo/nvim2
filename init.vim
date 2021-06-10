@@ -353,7 +353,6 @@
   Plug 'rhysd/committia.vim' "A Vim plugin for more pleasant editing on commit messages
   Plug 'mhinz/vim-startify' "🔗 The fancy start screen for Vim.
   Plug 'folke/todo-comments.nvim' "Highlight, list and search todo comments in your projects
-  Plug 'folke/trouble.nvim' "A pretty diagnostics, references, telescope results, quickfix and location list
   Plug 'andrewradev/splitjoin.vim' "gS (split), gJ (join) code blocks
   Plug 'sickill/vim-pasta' "pasting with indentation adjusted to destination context
   Plug 'AndrewRadev/tagalong.vim' " Change an HTML(ish) opening tag and take the closing one along as well
@@ -362,6 +361,11 @@
     "A Vim alignment plugin 🌻; bindings:
     nmap <leader>a <Plug>(EasyAlign)
     xmap <leader>a <Plug>(EasyAlign)
+  "}}}
+  "
+  Plug 'folke/trouble.nvim' "{{{
+    "A pretty diagnostics, references, telescope results, quickfix and location list
+    nmap <leader>t :TroubleToggle<cr>
   "}}}
 "}}}
 
@@ -517,8 +521,22 @@ syntax enable
 " lua config {{{
 lua << EOF
 
--- nvim-treesitter, nvim-ts-rainbow
 require('nvim-treesitter.configs').setup {
+  -- https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
+  ensure_installed = { -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+    "bash",
+    "css",
+    "go",
+    "html",
+    "json",
+    "lua",
+    "php",
+    "python",
+    "ruby",
+    "rust",
+    "toml",
+    "yaml",
+  },
   highlight = {
     enable = true,              -- false will disable the whole extension
   },
@@ -526,6 +544,9 @@ require('nvim-treesitter.configs').setup {
     enable = true,
     extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
     max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
+  },
+  matchup = {
+    enable = true,              -- mandatory, false will disable the whole extension
   }
 }
 
@@ -540,7 +561,7 @@ require("trouble").setup {
   fold_open = "v", -- icon used for open folds
   fold_closed = ">", -- icon used for closed folds
   indent_lines = false, -- add an indent guide below the fold icons
-  icons = true,
+  icons = false, -- requires nvim-web-devicons
   signs = {
       -- icons / text used for a diagnostic
       error = "error",
@@ -570,11 +591,11 @@ require('lspconfig').solargraph.setup {
 -- disable diagnostics
 --vim.lsp.handlers["textDocument/publishDiagnostics"] = function() end
 -- hide diagnostics
--- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
---   vim.lsp.diagnostic.on_publish_diagnostics, {
---     virtual_text = false
---   }
--- )
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    virtual_text = false
+  }
+)
 
 require('lspsaga').init_lsp_saga()
 
@@ -619,8 +640,7 @@ EOF
   function! TrimWhiteSpace()
     %s/\s\+$//e
   endfunction
-  "autocmd BufWritePre *.rb :call TrimWhiteSpace()
-  autocmd BufWritePre * undojoin | :call TrimWhiteSpace()
+  autocmd BufWritePre *.rb :call TrimWhiteSpace()
 " }}}
 
 " enjoy.
