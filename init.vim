@@ -77,11 +77,13 @@
   set scrolloff=8        " show 8 lines of context around cursor
   set showmode           " display mode you're in
   set wrap               " turn on line wrapping
-  set numberwidth=5      " width of line numbers
+  set inccommand=split   " show regular expression previews
+  set numberwidth=4      " width of line numbers
   set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
   set fillchars=diff:⣿,vert:│
+  set wildignore+=*.pyc,*.cache,*.min.*,*/.git/**/*,*/node_modules/**/*,*.swp,*.bak
   " set showbreak=↪
-  "
+
   set nobackup
   set noswapfile
 
@@ -197,7 +199,7 @@
   imap <F1> <Esc>
 
   " remap escape; this rox
-  imap jj <Esc>
+  imap jk <Esc>
   " Make line completion easier
   imap <C-l> <C-x><C-l>
 
@@ -212,6 +214,11 @@
 
   " remove current search highlighting
   nnoremap <space>l :noh<cr>
+
+  " terminal
+  " Getting out of the terminal insert mode.
+  tnoremap <Esc><Esc> <C-\><C-n>
+  nnoremap <leader>te :sp<Cr>:terminal<Cr>a
 
   " toggle paste mode on/off
   map <F9> :set paste!<cr>:set paste?<cr>
@@ -250,27 +257,27 @@
   Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
   " Find files using Telescope command-line sugar.
-	nnoremap <leader>f <cmd>Telescope find_files<cr>
-	nnoremap <leader>g <cmd>Telescope git_files<cr>
-  nnoremap <leader>s <cmd>Telescope live_grep<cr>
-  nnoremap <leader>b <cmd>Telescope buffers<cr>
-  nnoremap <leader>h <cmd>Telescope help_tags<cr>
-  nnoremap <leader>t <cmd>TodoTelescope<cr>
+	nnoremap <space>f <cmd>Telescope find_files<cr>
+	nnoremap <space>g <cmd>Telescope git_files<cr>
+  nnoremap <space>s <cmd>Telescope live_grep<cr>
+  nnoremap <space>b <cmd>Telescope buffers<cr>
+  nnoremap <space>th <cmd>Telescope help_tags<cr>
+  nnoremap <space>ta <cmd>Telescope tags<cr>
+  nnoremap <space>to <cmd>TodoTelescope<cr>
   nnoremap <leader><space> <cmd>Telescope current_buffer_fuzzy_find sorting_strategy=ascending prompt_position=top<cr>
 " }}}
 
 " LSP setup {{{
 	" Pictograms for lsp completion items
 	" Plug 'onsails/lspkind-nvim'
-
-	" Quickstart configurations for the Nvim LSP client
 	Plug 'neovim/nvim-lspconfig'
   Plug 'glepnir/lspsaga.nvim' "{{{
     nnoremap <silent>gh :Lspsaga lsp_finder<CR>
     nnoremap <silent>K :Lspsaga hover_doc<CR>
     nnoremap <silent>gr :Lspsaga rename<CR>
     nnoremap <silent>gd :Lspsaga preview_definition<CR>
-    nnoremap <silent> <leader>cd :Lspsaga show_line_diagnostics<CR>
+    nnoremap <space>h :Lspsaga show_line_diagnostics<CR>
+    " nnoremap <silent><leader>cd :Lspsaga show_line_diagnostics<CR>
 
     nnoremap <silent><leader>ca :Lspsaga code_action<CR>
     vnoremap <silent><leader>ca :<C-U>Lspsaga range_code_action<CR>
@@ -341,6 +348,8 @@
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} "Nvim Treesitter configurations and abstraction layer
   Plug 'JoosepAlviste/nvim-ts-context-commentstring' "Neovim treesitter plugin for setting the commentstring based on the cursor location in a file.
   Plug 'romgrk/nvim-treesitter-context' "Show code context
+  Plug 'RRethy/nvim-treesitter-textsubjects' "location-aware text objects with '.'
+'
   Plug 'windwp/nvim-autopairs' "autopairs for neovim written by lua
   Plug 'tversteeg/registers.nvim' "NeoVim plugin to preview the contents of the registers
   Plug 'justinmk/vim-sneak' "The missing motion for Vim 👟
@@ -365,12 +374,11 @@
   "
   Plug 'folke/trouble.nvim' "{{{
     "A pretty diagnostics, references, telescope results, quickfix and location list
-    nmap <leader>t :TroubleToggle<cr>
+    nmap <leader>tr :TroubleToggle<cr>
   "}}}
 "}}}
 
 " view, layout {{{
-  Plug 'jeffkreeftmeijer/vim-numbertoggle' "Toggles between hybrid and absolute line numbers automatically
   Plug 'christoomey/vim-tmux-navigator' "Seamless navigation between tmux panes and vim splits
 
   Plug 'sindrets/diffview.nvim', { 'on': 'DiffviewOpen' } "{{{
@@ -432,6 +440,7 @@
 "}}}
 
 " disabled for now {{{
+  " Plug 'jeffkreeftmeijer/vim-numbertoggle' "Toggles between hybrid and absolute line numbers automatically
   " Plug 'dstein64/nvim-scrollview' "A Neovim plugin that displays interactive scrollbars.
   " Plug 'npxbr/glow.nvim' "A markdown preview directly in your neovim.
   " Plug 'nvim-telescope/telescope-project.nvim'
@@ -529,7 +538,17 @@ require('nvim-treesitter.configs').setup {
   }
 }
 
+require'nvim-treesitter.configs'.setup {
+  textsubjects = {
+  enable = true,
+  keymaps = {
+    ['.'] = 'textsubjects-smart',
+    }
+  },
+}
+
 require('nvim-autopairs').setup()
+
 require('todo-comments').setup {
   signs = true
 }
@@ -550,9 +569,10 @@ require("trouble").setup {
   use_lsp_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
 }
 
+-- lsp settings
 -- ruby/solargraph
 -- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#solargraph
-require('lspconfig').solargraph.setup {
+require'lspconfig'.solargraph.setup {
   settings = {
     solargraph = {
       autoformat = true,
@@ -565,6 +585,10 @@ require('lspconfig').solargraph.setup {
     }
   }
 }
+--require'lspconfig'.bashls.setup{}
+--require'lspconfig'.sorbet.setup{}
+
+
 
 -- disable diagnostics
 --vim.lsp.handlers["textDocument/publishDiagnostics"] = function() end
@@ -573,7 +597,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     virtual_text = false,
     underline = false,
-    signs = true,
+    signs = true, -- signs customized below
   }
 )
 
@@ -585,6 +609,15 @@ require('lspsaga').init_lsp_saga {
     hint_sign = '',
     infor_sign = '',
 }
+
+doc_scroll_up = function(default_key)
+  if require('lspsaga.hover').has_saga_hover() then
+    require('lspsaga.hover').smart_scroll_hover(-1)
+  else
+    local key = vim.api.nvim_replace_termcodes(default_key,true,false,true)
+    vim.fn.nvim_feedkeys(key,'n',true)
+  end
+end
 
 EOF
 " }}}
@@ -625,7 +658,7 @@ EOF
   autocmd InsertLeave * match ExtraWhitespace /\s\+$/
   autocmd BufWinLeave * call clearmatches()
 
-  " ### http://vim.wikia.com/wiki/Remove_unwanted_spaces
+  " http://vim.wikia.com/wiki/Remove_unwanted_spaces
   function! StripTrailingWhitespace() abort
     if !&binary && &filetype != 'diff'
       let l:winview = winsaveview()
@@ -634,11 +667,22 @@ EOF
     endif
   endfunction
 
-  " #### Strip on save
+  " a list of groups can be found at `:help nvim_tree_highlight`
+  highlight NvimTreeFolderIcon ctermfg=blue
+
+  " strip on save
   augroup strip_on_save
     autocmd!
     autocmd BufWritePre * call StripTrailingWhitespace()
   augroup end
+
+  augroup numbertoggle
+    autocmd!
+    autocmd BufEnter * set nu   rnu
+    autocmd BufLeave * set nonu nornu
+    " autocmd BufEnter,FocusGained,InsertLeave * set nu rnu
+    " autocmd BufLeave,FocusLost,InsertEnter   * set nonu nornu
+  augroup END
 " }}}
 
 " enjoy.
