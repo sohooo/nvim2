@@ -2,17 +2,15 @@
 
 This setup is based on various sources all around github. Huge credits go to these projects:
 
-- [bling.vim](https://github.com/bling/dotvim)
-- [spf13-vim](https://github.com/spf13/spf13-vim)
-- [mutewinter's dotvim](https://github.com/mutewinter/dot_vim)
-- [skwp's dotfiles](https://github.com/skwp/dotfiles)
-
+- [lspsaga](https://github.com/glepnir/lspsaga.nvim)
+- [telescope](https://github.com/nvim-telescope/telescope.nvim)
 
 ## Features
 
 - nvim 0.5 telescope-based setup
 - complete package with useful plugins, bindings and colorschemes
 - fully portable; place this repo anywhere you want
+- modern telescope and lspsaga setup
 - nicely structured and fine-tuned `vimrc` (`init.vim`) config for easy extension/modification
 - enhanced markdown editing with folding, fenced code highlighting and TOC
 - distraction-free writing mode with focus on current paragraph
@@ -28,36 +26,52 @@ This setup is based on various sources all around github. Huge credits go to the
 
 ## Bindings
 
-Here's a list of some useful keyboard bindings:
+Here's a list of some useful keyboard bindings. To get an overview and search trough them, use `:Telescope keymaps`
+
 
 ### Finding stuff with Telescope
 
-* `,f` find_files
-* `,g` git_files
-* `,s` live_grep ("search")
-* `,b` buffers
-* `,h` help_tags
-* `,t` todos
-* `,<space>` find in current buffer
+* `<space> f` find_files
+* `<space> g` git_files
+* `<space> s` live_grep ("search")
+* `<space> b` buffers
+* `<space> ta` tags
+* `<space> th` help_tags
+* `<space> to` todos
+* `<leader><space>` find in current buffer
 
 [Telescope bindings](https://github.com/nvim-telescope/telescope.nvim#mappings) to select/open files:
 
-* `<c-np>`  movement
+* `<c-n|p>` movement
 * `<c-t>`   open in tab
 * `<c-v>`   open in vertical split
 * `<c-x>`   open in horizontal split
 
 
+### lspsaga Helpers
+
+* `gh`   find element
+* `K`    show docs
+* `gr`   rename element
+* `gd`   preview definition
+* `gs`   show signatur help
+* `<space> h`   show line diagnostics
+
+
 ### Movement and others
 
 * `s`       vim-sneak; like 'f', but multiple lines; `sab`
-* `,d`      toggle NerdTree
+* `,d`      toggle nvim-tree; [bindings](https://github.com/kyazdani42/nvim-tree.lua#keybindings)
 * `,u`      toggle UndoTree
+* `,tr`     toggle Trouble diagnostics
+* `,c`      toggle DiffView
 * `,w`      toggle distraction-free writing
 * `gcc`     toggle comment on/off
-* `jj`      remap of ESC
+* `jk`      remap of ESC
+* `<space> h` clear search highlight
 * `F9`      toggle paste/nopaste
 * `F10`     toggle number/nonumber
+* `,te`     open terminal
 * `,tt`     change tabs
 
 
@@ -87,6 +101,9 @@ Here's a list of some useful keyboard bindings:
 
 
 ## Other Tips
+
+- automatically removes trailing whitespace on save
+- smart text objects: select text, then use `.` to enlage selection
 
 ### Statusbar Fonts
 For an even prettier status bar, use one of the [powerline fonts](https://github.com/vim-airline/vim-airline#integrating-with-powerline-fonts).
