@@ -625,10 +625,20 @@ EOF
   autocmd InsertLeave * match ExtraWhitespace /\s\+$/
   autocmd BufWinLeave * call clearmatches()
 
-  function! TrimWhiteSpace()
-    %s/\s\+$//e
+  " ### http://vim.wikia.com/wiki/Remove_unwanted_spaces
+  function! StripTrailingWhitespace() abort
+    if !&binary && &filetype != 'diff'
+      let l:winview = winsaveview()
+      silent! %s/\s\+$//e
+      call winrestview(l:winview)
+    endif
   endfunction
-  autocmd BufWritePre *.rb :call TrimWhiteSpace()
+
+  " #### Strip on save
+  augroup strip_on_save
+    autocmd!
+    autocmd BufWritePre * call StripTrailingWhitespace()
+  augroup end
 " }}}
 
 " enjoy.
