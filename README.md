@@ -17,6 +17,7 @@ This setup is based on various sources all around github. Huge credits go to the
 - trailing whitespace on save are automatically removed
 - regex commands (like search/replace) with live preview
 - smart text objects: select text, then use `.` to enlage selection
+- [which-key](https://github.com/folke/which-key.nvim): displays a popup with possible keybindings of the command you started typing
 
 
 ## Installation
@@ -70,7 +71,7 @@ Here's a list of some useful keyboard bindings. To get an overview and search tr
 * `,c`      toggle DiffView
 * `,w`      toggle distraction-free writing
 * `gcc`     toggle comment on/off
-* `jk`      remap of ESC
+* `kj`      remap of ESC
 * `<space> h` clear search highlight
 * `F9`      toggle paste/nopaste
 * `F10`     toggle number/nonumber

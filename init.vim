@@ -198,8 +198,8 @@
   map <F1> <Esc>
   imap <F1> <Esc>
 
-  " remap escape; this rox
-  imap jk <Esc>
+  " for the lazy: remap escape
+  imap kj <Esc>
   " Make line completion easier
   imap <C-l> <C-x><C-l>
 
@@ -213,7 +213,7 @@
   nnoremap g, g,zz
 
   " remove current search highlighting
-  nnoremap <space>l :noh<cr>
+  nnoremap <space>l :nohlsearch<cr>
 
   " terminal
   " Getting out of the terminal insert mode.
@@ -376,6 +376,8 @@
     "A pretty diagnostics, references, telescope results, quickfix and location list
     nmap <leader>tr :TroubleToggle<cr>
   "}}}
+
+  Plug 'folke/which-key.nvim'
 "}}}
 
 " view, layout {{{
@@ -414,7 +416,7 @@
   Plug 'kyazdani42/nvim-web-devicons' "lua fork of vim-web-devicons for neovim; no hook for nerdtree
   Plug 'p00f/nvim-ts-rainbow' "🌈 Rainbow parentheses for neovim using tree-sitter
   Plug 'kshenoy/vim-signature' "Plugin to toggle, display and navigate marks
-  Plug 'glepnir/indent-guides.nvim'
+  " Plug 'glepnir/indent-guides.nvim' " throws: error executing vim.schedule lua callback: vim:e803: id not found: 34
   Plug 'folke/lsp-colors.nvim'
 
   Plug 'vim-airline/vim-airline' "{{{
@@ -550,6 +552,8 @@ require'nvim-treesitter.configs'.setup {
 
 require('nvim-autopairs').setup()
 
+require('which-key').setup {}
+
 require('todo-comments').setup {
   signs = true
 }
@@ -620,8 +624,7 @@ doc_scroll_up = function(default_key)
   end
 end
 
-require('indent_guides').setup({
-})
+-- require('indent_guides').setup({ })
 
 EOF
 " }}}
@@ -696,4 +699,3 @@ EOF
   augroup END
 " }}}
 
-" enjoy.
