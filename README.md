@@ -14,6 +14,9 @@ This setup is based on various sources all around github. Huge credits go to the
 - nicely structured and fine-tuned `vimrc` (`init.vim`) config for easy extension/modification
 - enhanced markdown editing with folding, fenced code highlighting and TOC
 - distraction-free writing mode with focus on current paragraph
+- trailing whitespace on save are automatically removed
+- regex commands (like search/replace) with live preview
+- smart text objects: select text, then use `.` to enlage selection
 
 
 ## Installation
@@ -26,7 +29,7 @@ This setup is based on various sources all around github. Huge credits go to the
 
 ## Bindings
 
-Here's a list of some useful keyboard bindings. To get an overview and search trough them, use `:Telescope keymaps`
+Here's a list of some useful keyboard bindings. To get an overview and search trough them, use the `:Telescope keymaps` command.
 
 
 ### Finding stuff with Telescope
@@ -100,13 +103,8 @@ Here's a list of some useful keyboard bindings. To get an overview and search tr
 *  fenced code blocks
 
 
-## Other Tips
-
-- automatically removes trailing whitespace on save
-- smart text objects: select text, then use `.` to enlage selection
-
-### Statusbar Fonts
-For an even prettier status bar, use one of the [powerline fonts](https://github.com/vim-airline/vim-airline#integrating-with-powerline-fonts).
+### Fonts
+For all the icons to show correctly, please use one of the [Nerd Fonts](https://www.nerdfonts.com).
 
 
 ### Distraction-free Writing
