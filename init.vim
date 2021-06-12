@@ -414,6 +414,7 @@
   Plug 'kyazdani42/nvim-web-devicons' "lua fork of vim-web-devicons for neovim; no hook for nerdtree
   Plug 'p00f/nvim-ts-rainbow' "🌈 Rainbow parentheses for neovim using tree-sitter
   Plug 'kshenoy/vim-signature' "Plugin to toggle, display and navigate marks
+  Plug 'glepnir/indent-guides.nvim'
   Plug 'folke/lsp-colors.nvim'
 
   Plug 'vim-airline/vim-airline' "{{{
@@ -619,6 +620,9 @@ doc_scroll_up = function(default_key)
   end
 end
 
+require('indent_guides').setup({
+})
+
 EOF
 " }}}
 
@@ -645,7 +649,8 @@ EOF
   highlight LspDiagnosticsDefaultInformation ctermfg=blue guifg=red
   highlight LspDiagnosticsDefaultHint ctermfg=grey guifg=red
 " }}}
-"
+
+  " automatically show diagnostics on cursor pos.
   " autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
   " autocmd CursorHold * :Lspsaga show_line_diagnostics
   " autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()
@@ -666,6 +671,12 @@ EOF
       call winrestview(l:winview)
     endif
   endfunction
+
+  " indent guides
+  hi IndentGuidesOdd  ctermbg=black
+  hi IndentGuidesEven ctermbg=darkgrey
+  hi IndentGuidesOdd guibg=darkgrey ctermbg=234
+  hi IndentGuidesEven guibg=darkgrey ctermbg=235
 
   " a list of groups can be found at `:help nvim_tree_highlight`
   highlight NvimTreeFolderIcon ctermfg=blue
