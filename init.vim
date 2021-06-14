@@ -269,7 +269,7 @@
 
 " LSP setup {{{
 	" Pictograms for lsp completion items
-	" Plug 'onsails/lspkind-nvim'
+	Plug 'onsails/lspkind-nvim'
 	Plug 'neovim/nvim-lspconfig'
   Plug 'glepnir/lspsaga.nvim' "{{{
     nnoremap <silent>gh :Lspsaga lsp_finder<CR>
@@ -613,6 +613,11 @@ require('lspsaga').init_lsp_saga {
     warn_sign = '',
     hint_sign = '',
     infor_sign = '',
+    -- non-patched font variant
+    --error_sign = "ⓧ",
+    --warn_sign = "⚠",
+    --hint_sign = "ⓘ",
+    --infor_sign = "ⓘ",
 }
 
 doc_scroll_up = function(default_key)
@@ -625,6 +630,8 @@ doc_scroll_up = function(default_key)
 end
 
 -- require('indent_guides').setup({ })
+
+require('lspkind').init({})
 
 EOF
 " }}}
