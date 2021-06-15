@@ -349,16 +349,20 @@
   Plug 'JoosepAlviste/nvim-ts-context-commentstring' "Neovim treesitter plugin for setting the commentstring based on the cursor location in a file.
   Plug 'romgrk/nvim-treesitter-context' "Show code context
   Plug 'RRethy/nvim-treesitter-textsubjects' "location-aware text objects with '.'
-'
+
+  Plug 'ggandor/lightspeed.nvim' "vim-sneak alternative
+
   Plug 'windwp/nvim-autopairs' "autopairs for neovim written by lua
   Plug 'tversteeg/registers.nvim' "NeoVim plugin to preview the contents of the registers
-  Plug 'justinmk/vim-sneak' "The missing motion for Vim 👟
+
   Plug 'tpope/vim-surround' "quoting/parenthesizing made simple
   Plug 'tpope/vim-repeat' "enable repeating supported plugin maps with .
   Plug 'tpope/vim-endwise' "wisely add end in ruby, endfunction/endif/more in vim script, etc
   Plug 'tpope/vim-jdaddy' "JSON manipulation and pretty printing
   Plug 'tpope/vim-fugitive' "A Git wrapper so awesome, it should be illegal
-  Plug 'tpope/vim-commentary' "comment stuff out
+
+  Plug 'b3nj5m1n/kommentary'
+
   Plug 'rhysd/committia.vim' "A Vim plugin for more pleasant editing on commit messages
   Plug 'mhinz/vim-startify' "🔗 The fancy start screen for Vim.
   Plug 'folke/todo-comments.nvim' "Highlight, list and search todo comments in your projects
