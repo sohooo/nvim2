@@ -212,6 +212,9 @@
   nnoremap g; g;zz
   nnoremap g, g,zz
 
+  " close those windows
+  nnoremap cl :pclose \| lclose \| cclose<cr>
+
   " remove current search highlighting
   nnoremap <space>l :nohlsearch<cr>
 
