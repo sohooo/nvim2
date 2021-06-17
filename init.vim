@@ -389,7 +389,12 @@
   "}}}
 
   Plug 'folke/which-key.nvim'
-"}}}
+
+  Plug 'liuchengxu/vista.vim' ", { 'on': 'Vista' } "{{{
+    " Viewer & Finder for LSP symbols and tags
+    nnoremap <leader>tt :Vista nvim_lsp<cr>
+  "}}}
+
 
 " view, layout {{{
   Plug 'christoomey/vim-tmux-navigator' "Seamless navigation between tmux panes and vim splits

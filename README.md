@@ -76,7 +76,7 @@ Here's a list of some useful keyboard bindings. To get an overview and search tr
 * `F9`      toggle paste/nopaste
 * `F10`     toggle number/nonumber
 * `,te`     open terminal
-* `,tt`     change tabs
+* `,tt`     open Vista nvim_lsp symbols
 
 
 ### Snippets
