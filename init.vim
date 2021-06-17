@@ -348,12 +348,16 @@
 "}}}
 
 " editing tools {{{
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} "Nvim Treesitter configurations and abstraction layer
-  Plug 'JoosepAlviste/nvim-ts-context-commentstring' "Neovim treesitter plugin for setting the commentstring based on the cursor location in a file.
-  Plug 'romgrk/nvim-treesitter-context' "Show code context
-  Plug 'RRethy/nvim-treesitter-textsubjects' "location-aware text objects with '.'
+
+  "Nvim Treesitter configurations and abstraction layer
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'JoosepAlviste/nvim-ts-context-commentstring'
+  Plug 'romgrk/nvim-treesitter-context'
+  Plug 'RRethy/nvim-treesitter-textsubjects'
 
   Plug 'ggandor/lightspeed.nvim' "vim-sneak alternative
+
+  Plug 'stefandtw/quickfix-reflector.vim' " Change code right in the quickfix window
 
   Plug 'windwp/nvim-autopairs' "autopairs for neovim written by lua
   Plug 'tversteeg/registers.nvim' "NeoVim plugin to preview the contents of the registers

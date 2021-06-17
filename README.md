@@ -97,6 +97,19 @@ Here's a list of some useful keyboard bindings. To get an overview and search tr
 * `,a:`  align :
 
 
+
+## Workflows
+
+### Search and Replace
+
+Search and replace is like nothing you've ever experienced, thanks to `Telescope` and `quickfix-reflector`. Ok, let's say you want to replace the function `foo` with `bar` in some files in the project. Watch this:
+
+- search for string: `<space> s` to open Telescope live_grep, then enter `foo`
+- put those results into the quickfix list with `<ctrl> q` ([watch this](https://www.youtube.com/watch?v=IoyW8XYGqjM) if you have no idea what the quickfix list is)
+- now, edit the contents in the quickfix list! optionally remove lines you don't want to replace, then some kind of: `:s/foo/bar/g`. We even get a preview of our replacement.
+- if we're happy, `:w`rite the changes
+
+
 ### Markdown
 
 * `:Toc`  display table of contents
@@ -104,14 +117,18 @@ Here's a list of some useful keyboard bindings. To get an overview and search tr
 *  fenced code blocks
 
 
-### Fonts
-For all the icons to show correctly, please use one of the [Nerd Fonts](https://www.nerdfonts.com).
-
-
 ### Distraction-free Writing
+
 Distraction-free writing a la iAWriter is supported via [a plugin from LakTEK](http://laktek.com/2012/09/05/distraction-free-writing-with-vim/). Toggle the view with `,w`, and don't forget to disable the OSX native fullscreen view:
 
     defaults write org.vim.MacVim MMNativeFullScreen 0
 
-You also need the [Cousine Font from Google](http://www.fontsquirrel.com/fonts/cousine) as a free alternative to Nitti Light.
+You could also use [Cousine Font from Google](http://www.fontsquirrel.com/fonts/cousine) as a free alternative to Nitti Light, if that's your thing.
+
+
+
+## Misc
+
+### Fonts
+For all the icons to show correctly, please use one of the [Nerd Fonts](https://www.nerdfonts.com).
 
