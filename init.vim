@@ -221,7 +221,8 @@
   " terminal
   " Getting out of the terminal insert mode.
   tnoremap <Esc><Esc> <C-\><C-n>
-  nnoremap <leader>te :sp<Cr>:terminal<Cr>a
+  " nnoremap <leader>te :sp<Cr>:terminal<Cr>a  " classic terminal
+  nnoremap <leader>te :Ttoggle<cr>             " termwrapper plugin
 
   " toggle paste mode on/off
   map <F9> :set paste!<cr>:set paste?<cr>
@@ -285,6 +286,9 @@
     nnoremap <silent><leader>ca :Lspsaga code_action<CR>
     vnoremap <silent><leader>ca :<C-U>Lspsaga range_code_action<CR>
     nnoremap <silent>gs :Lspsaga signature_help<CR>
+
+    " also lsp, but not lspsaga
+    nnoremap <leader>s <cmd>lua vim.lsp.buf.formatting()<cr>
   "}}}
 " }}}
 
@@ -298,7 +302,7 @@
 " autocompletion, snippets {{{
 	Plug 'rafamadriz/friendly-snippets'
 	Plug 'hrsh7th/vim-vsnip' "{{{
-		" bindings: ctrl-p|n to select; (s-)tab to jump
+		" bindings: ctrl-p|n to select, ctrl-j|l to expand; (s-)tab to jump
 		" Expand
 		imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
 		smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
@@ -396,7 +400,12 @@
   "}}}
 
 
-" view, layout {{{
+" addons, layout {{{
+  Plug 'oberblastmeister/termwrapper.nvim' "{{{
+    " let g:test#custom_strategies = {'termwrapper': function('TermWrapperStrategy')}
+    " let g:test#strategy = 'termwrapper'
+  "}}}
+
   Plug 'christoomey/vim-tmux-navigator' "Seamless navigation between tmux panes and vim splits
 
   Plug 'sindrets/diffview.nvim', { 'on': 'DiffviewOpen' } "{{{
@@ -648,6 +657,18 @@ end
 -- require('indent_guides').setup({ })
 
 require('lspkind').init({})
+
+require"termwrapper".setup {
+  -- these are all of the defaults
+  open_autoinsert = true, -- autoinsert when opening
+  toggle_autoinsert = true, -- autoinsert when toggling
+  autoclose = true, -- autoclose, (no [Process exited 0])
+  winenter_autoinsert = false, -- autoinsert when entering the window
+  default_window_command = "belowright 13split", -- the default window command to run when none is specified,
+  -- opens a window in the bottom
+  open_new_toggle = true, -- open a new terminal if the toggle target does not exist
+  log = 1, -- 1 = warning, 2 = info, 3 = debug
+}
 
 EOF
 " }}}
