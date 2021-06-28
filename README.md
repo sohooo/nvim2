@@ -52,7 +52,7 @@ Here's a list of some useful keyboard bindings. To get an overview and search tr
 * `<c-x>`   open in horizontal split
 
 
-### lspsaga Helpers
+### lsp(saga) Helpers
 
 * `gh`   find element
 * `K`    show docs
@@ -60,11 +60,13 @@ Here's a list of some useful keyboard bindings. To get an overview and search tr
 * `gd`   preview definition
 * `gs`   show signatur help
 * `<space> h`   show line diagnostics
+* `,s`   fix **s**tyle (format) current file
 
 
 ### Movement and others
 
 * `s`       vim-sneak; like 'f', but multiple lines; `sab`
+* `,a`      align line/selection
 * `,d`      toggle nvim-tree; [bindings](https://github.com/kyazdani42/nvim-tree.lua#keybindings)
 * `,u`      toggle UndoTree
 * `,tr`     toggle Trouble diagnostics
@@ -75,7 +77,7 @@ Here's a list of some useful keyboard bindings. To get an overview and search tr
 * `<space> h` clear search highlight
 * `F9`      toggle paste/nopaste
 * `F10`     toggle number/nonumber
-* `,te`     open terminal
+* `,te`     toggle terminal
 * `,tt`     open Vista nvim_lsp symbols
 
 
@@ -89,13 +91,6 @@ Here's a list of some useful keyboard bindings. To get an overview and search tr
 
 * `:Gdiff`    show diff
 * `:Gstatus`  toggle files with `-`
-
-
-### Tabular
-
-* `,a=`  align =
-* `,a:`  align :
-
 
 
 ## Workflows

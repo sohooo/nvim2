@@ -173,7 +173,7 @@
 
 " bindings {{{
   let mapleader=","
-  nmap <silent> <leader>s :set spell!<CR>
+  "nmap <silent> <leader>s :set spell!<CR>
   nmap <silent> <leader>vim :e <sfile><CR>
   nmap <leader>r :syntax sync fromstart<cr>:redraw!<cr>
 
@@ -233,6 +233,9 @@
   au BufReadPost *.rb set keywordprg=ri
   au BufReadPost *.pp set keywordprg=puppet\ describe
 
+  " filetypes
+  au BufRead,BufNewFile *.pp setfiletype puppet
+
   " easy tab switching
   nmap tt :tabnext<cr>
   map  tt :tabnext<cr>
@@ -288,7 +291,7 @@
     nnoremap <silent>gs :Lspsaga signature_help<CR>
 
     " also lsp, but not lspsaga
-    nnoremap <leader>s <cmd>lua vim.lsp.buf.formatting()<cr>
+    nnoremap <leader>s gggqG \| <cmd>lua vim.lsp.buf.formatting()<cr>
   "}}}
 " }}}
 
@@ -721,6 +724,13 @@ EOF
   autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
   autocmd InsertLeave * match ExtraWhitespace /\s\+$/
   autocmd BufWinLeave * call clearmatches()
+
+  function! ReformatThisBuffer()
+    :normal gggqG
+    silent! lua vim.lsp.buf.formatting()
+  endfunction
+
+  nnoremap <leader>s :call ReformatThisBuffer()<cr>
 
   " http://vim.wikia.com/wiki/Remove_unwanted_spaces
   function! StripTrailingWhitespace() abort
