@@ -12,7 +12,7 @@ This setup is based on various sources all around github. Huge credits go to the
 - fully portable; place this repo anywhere you want
 - modern telescope and lspsaga setup
 - nicely structured and fine-tuned `vimrc` (`init.vim`) config for easy extension/modification
-- enhanced markdown editing with folding, fenced code highlighting and TOC
+- enhanced markdown editing with folding, fenced code hightighting and TOC
 - distraction-free writing mode with focus on current paragraph
 - trailing whitespace on save are automatically removed
 - regex commands (like search/replace) with live preview
@@ -65,8 +65,8 @@ Here's a list of some useful keyboard bindings. To get an overview and search tr
 
 ### Movement and others
 
-* `s`       vim-sneak; like 'f', but multiple lines; `sab`
-* `,a`      align line/selection
+* `s`       [lightspeed.nvim](https://github.com/ggandor/lightspeed.nvim);  like 'f', but multiple lines; `sab`
+* `,a =`    align line/selection
 * `,d`      toggle nvim-tree; [bindings](https://github.com/kyazdani42/nvim-tree.lua#keybindings)
 * `,u`      toggle UndoTree
 * `,tr`     toggle Trouble diagnostics
@@ -74,7 +74,7 @@ Here's a list of some useful keyboard bindings. To get an overview and search tr
 * `,w`      toggle distraction-free writing
 * `gcc`     toggle comment on/off
 * `kj`      remap of ESC
-* `<space> h` clear search highlight
+* `<space> l` clear search highlight
 * `F9`      toggle paste/nopaste
 * `F10`     toggle number/nonumber
 * `,te`     toggle terminal
