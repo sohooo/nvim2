@@ -425,7 +425,7 @@
 
   Plug 'sindrets/diffview.nvim', { 'on': 'DiffviewOpen' } "{{{
     "Single tabpage interface to easily cycle through diffs for all modified files for any git rev.
-    nnoremap <leader>c :DiffviewOpen<CR>
+    " nnoremap <leader>c :DiffviewOpen<CR>
   "}}}
 
   Plug 'kyazdani42/nvim-tree.lua', { 'on': 'NvimTreeToggle' } "{{{
@@ -732,7 +732,8 @@ EOF
   " autocmd CursorHold * :Lspsaga show_line_diagnostics
   " autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()
 
-" whitespace handling {{{
+" utils {{{
+  " whitespace handling
   highlight ExtraWhitespace ctermbg=red guibg=red
   match ExtraWhitespace /\s\+$/
   " autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
@@ -740,11 +741,28 @@ EOF
   autocmd InsertLeave * match ExtraWhitespace /\s\+$/
   autocmd BufWinLeave * call clearmatches()
 
+  function! ToggleDiffviewBehaviour()
+    if bufexists(bufname('DiffviewFiles'))
+      let g:lens#disabled = 0
+      set signcolumn=auto
+      silent! GitGutterEnable
+      silent! DiffviewClose
+      set eventignore=""
+    else
+      let g:lens#disabled = 1
+      set signcolumn=no
+      silent! GitGutterDisable
+      silent! DiffviewOpen
+      set eventignore=BufEnter,BufLeave
+      :normal <C-w>=
+    endif
+  endfunction
+  nnoremap <leader>c :call ToggleDiffviewBehaviour()<cr>
+
   function! ReformatThisBuffer()
     :normal gggqG
     silent! lua vim.lsp.buf.formatting()
   endfunction
-
   nnoremap <leader>s :call ReformatThisBuffer()<cr>
 
   " http://vim.wikia.com/wiki/Remove_unwanted_spaces
