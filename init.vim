@@ -463,12 +463,15 @@
   Plug 'kshenoy/vim-signature' "Plugin to toggle, display and navigate marks
   " Plug 'glepnir/indent-guides.nvim' " throws: error executing vim.schedule lua callback: vim:e803: id not found: 34
   Plug 'folke/lsp-colors.nvim'
+  Plug 'lukas-reineke/indent-blankline.nvim' "{{{
+    let g:indent_blankline_use_treesitter = v:true
+  "}}}
+
 
   Plug 'f-person/git-blame.nvim', { 'on': 'GitBlameToggle' } " {{{
     let g:gitblame_enabled = 0
     let g:gitblame_message_template = ' <author> • <date> • <summary>'
   " }}}
-
 
   Plug 'vim-airline/vim-airline' "{{{
     let g:airline#extensions#tabline#enabled = 1
@@ -771,7 +774,7 @@ EOF
   nnoremap <leader>c :call ToggleDiffviewBehaviour()<cr>
 
   function! ReformatThisBuffer()
-    :normal gggqG
+    " :normal gggqG
     silent! lua vim.lsp.buf.formatting()
   endfunction
   nnoremap <leader>s :call ReformatThisBuffer()<cr>
