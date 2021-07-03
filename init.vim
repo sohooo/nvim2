@@ -464,6 +464,12 @@
   " Plug 'glepnir/indent-guides.nvim' " throws: error executing vim.schedule lua callback: vim:e803: id not found: 34
   Plug 'folke/lsp-colors.nvim'
 
+  Plug 'f-person/git-blame.nvim', { 'on': 'GitBlameToggle' } " {{{
+    let g:gitblame_enabled = 0
+    let g:gitblame_message_template = ' <author> • <date> • <summary>'
+  " }}}
+
+
   Plug 'vim-airline/vim-airline' "{{{
     let g:airline#extensions#tabline#enabled = 1
     let g:airline_theme='iceberg'

@@ -80,6 +80,7 @@ Here's a list of some useful keyboard bindings. To get an overview and search tr
 * `F10`     toggle number/nonumber
 * `,te`     toggle terminal
 * `,tt`     open Vista nvim_lsp symbols
+* `:GitBlameToggle`  show git blame info
 
 
 ### Snippets
