@@ -364,6 +364,11 @@
 
   Plug 'ggandor/lightspeed.nvim' "vim-sneak alternative
 
+  Plug 'jbyuki/instant.nvim' "{{{
+    "collaborative editing in Neovim using built-in capabilities
+    let g:instant_username = "sohooo"
+  " }}}
+
   Plug 'stefandtw/quickfix-reflector.vim' " Change code right in the quickfix window
 
   Plug 'windwp/nvim-autopairs' "autopairs for neovim written by lua

@@ -17,6 +17,7 @@ This setup is based on various sources all around github. Huge credits go to the
 - trailing whitespace on save are automatically removed
 - regex commands (like search/replace) with live preview
 - smart text objects: select text, then use `.` to enlage selection
+- collab editing with [instant](https://github.com/jbyuki/instant.nvim)
 - [which-key](https://github.com/folke/which-key.nvim): displays a popup with possible keybindings of the command you started typing
 
 
