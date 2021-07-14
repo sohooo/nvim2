@@ -203,6 +203,10 @@
   " Make line completion easier
   imap <C-l> <C-x><C-l>
 
+  " switch buffers with tab
+  nnoremap <tab>   :bnext<cr>
+  nnoremap <S-tab> :bprevious<cr>
+
   " keep the cursor in place while joining limes
   nnoremap J mzJ`z
   " keep search matches in the middle of the window.

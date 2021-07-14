@@ -66,6 +66,7 @@ Here's a list of some useful keyboard bindings. To get an overview and search tr
 
 ### Movement and others
 
+* `tab, S-tab` switch buffers
 * `s`       [lightspeed.nvim](https://github.com/ggandor/lightspeed.nvim);  like 'f', but multiple lines; `sab`
 * `,a =`    align line/selection
 * `,d`      toggle nvim-tree; [bindings](https://github.com/kyazdani42/nvim-tree.lua#keybindings)
