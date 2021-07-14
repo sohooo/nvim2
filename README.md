@@ -45,7 +45,7 @@ Here's a list of some useful keyboard bindings. To get an overview and search tr
 * `<space> to` todos
 * `<leader><space>` find in current buffer
 
-[Telescope bindings](https://github.com/nvim-telescope/telescope.nvim#mappings) to select/open files:
+[Telescope bindings](https://github.com/nvim-telescope/telescope.nvim#mappings) to select/open files (same for nvim-tree):
 
 * `<c-n|p>` movement
 * `<c-t>`   open in tab
