@@ -404,6 +404,7 @@
 
   Plug 'liuchengxu/vista.vim' ", { 'on': 'Vista' } "{{{
     " Viewer & Finder for LSP symbols and tags
+    let g:vista#renderer#enable_icon = 0
     nnoremap <leader>tt :Vista nvim_lsp<cr>
   "}}}
 
@@ -434,6 +435,34 @@
   "}}}
 
   Plug 'kyazdani42/nvim-tree.lua', { 'on': 'NvimTreeToggle' } "{{{
+    let g:nvim_tree_git_hl = 1 "0 by default, will enable file highlight for git attributes (can be used without the icons).
+    let g:nvim_tree_indent_markers = 1 "0 by default, this option shows indent markers when folders are open
+    let g:nvim_tree_follow = 1 "0 by default, this option allows the cursor to be updated when entering a buffer
+    let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ] "empty by default
+    let g:nvim_tree_tab_open = 1 "0 by default, will open the tree when entering a new tab and the tree was previously open
+    let g:nvim_tree_add_trailing = 1 "0 by default, append a trailing slash to folder names
+    let g:nvim_tree_group_empty = 1 " 0 by default, compact folders that only contain a single folder into one node in the file tree
+
+    let g:nvim_tree_show_icons = {
+    \ 'git': 0,
+    \ 'folders': 1,
+    \ 'files': 0,
+    \ 'folder_arrows': 0,
+    \ }
+
+    let g:nvim_tree_icons = {
+    \ 'folder': {
+    \   'arrow_open': "▾",
+    \   'arrow_closed': "▸",
+    \   'default': "▸",
+    \   'open': "▾",
+    \   'empty': "▸",
+    \   'empty_open': "",
+    \   'symlink': "",
+    \   'symlink_open': "",
+    \   }
+    \ }
+
     nnoremap <leader>d :NvimTreeToggle<CR>
   "}}}
 
@@ -458,7 +487,7 @@
 " visuals {{{
   Plug 'airblade/vim-gitgutter'
   " Plug 'ryanoasis/vim-devicons'
-  Plug 'kyazdani42/nvim-web-devicons' "lua fork of vim-web-devicons for neovim; no hook for nerdtree
+  " Plug 'kyazdani42/nvim-web-devicons' "lua fork of vim-web-devicons for neovim; no hook for nerdtree
   Plug 'p00f/nvim-ts-rainbow' "🌈 Rainbow parentheses for neovim using tree-sitter
   Plug 'kshenoy/vim-signature' "Plugin to toggle, display and navigate marks
   " Plug 'glepnir/indent-guides.nvim' " throws: error executing vim.schedule lua callback: vim:e803: id not found: 34
@@ -476,7 +505,7 @@
   Plug 'vim-airline/vim-airline' "{{{
     let g:airline#extensions#tabline#enabled = 1
     let g:airline_theme='iceberg'
-    let g:airline_powerline_fonts=1
+    let g:airline_powerline_fonts=0
     if !exists('g:airline_powerline_fonts')
       " Use the default set of separators with a few customizations
       let g:airline_left_sep='›'  " Slightly fancier than '>'
@@ -605,8 +634,12 @@ require('nvim-autopairs').setup()
 
 require('which-key').setup {}
 
+require('telescope').setup {
+  color_devicons = false,
+}
+
 require('todo-comments').setup {
-  signs = true
+  signs = false
 }
 
 require("trouble").setup {
@@ -614,7 +647,7 @@ require("trouble").setup {
   fold_open = "v", -- icon used for open folds
   fold_closed = ">", -- icon used for closed folds
   indent_lines = false, -- add an indent guide below the fold icons
-  icons = true, -- requires nvim-web-devicons
+  icons = false, -- requires nvim-web-devicons
   signs = {
       -- icons / text used for a diagnostic
       error = "error",
@@ -659,11 +692,17 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 
 -- require('lspsaga').init_lsp_saga()
 require('lspsaga').init_lsp_saga {
+    error_sign = "✯",
+    warn_sign = "◆",
+    hint_sign = "○",
+    infor_sign = "◇",
+
     -- override ugly vim.lsp arrow icon
-    error_sign = '', -- 
-    warn_sign = '',
-    hint_sign = '',
-    infor_sign = '',
+    --error_sign = '', -- 
+    --warn_sign = '',
+    --hint_sign = '',
+    --infor_sign = '',
+
     -- non-patched font variant
     --error_sign = "ⓧ",
     --warn_sign = "⚠",
@@ -800,12 +839,12 @@ EOF
     autocmd BufWritePre * call StripTrailingWhitespace()
   augroup end
 
-  augroup numbertoggle
-    autocmd!
-    autocmd BufEnter * set nu   rnu
-    autocmd BufLeave * set nonu nornu
-    " autocmd BufEnter,FocusGained,InsertLeave * set nu rnu
-    " autocmd BufLeave,FocusLost,InsertEnter   * set nonu nornu
-  augroup END
+  " augroup numbertoggle
+  "   autocmd!
+  "   autocmd BufEnter * set nu   rnu
+  "   autocmd BufLeave * set nonu nornu
+  "   " autocmd BufEnter,FocusGained,InsertLeave * set nu rnu
+  "   " autocmd BufLeave,FocusLost,InsertEnter   * set nonu nornu
+  " augroup END
 " }}}
 
