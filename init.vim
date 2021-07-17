@@ -507,6 +507,9 @@
     let g:gitblame_message_template = ' <author> • <date> • <summary>'
   " }}}
 
+  " FIXME: aktivieren nach https://github.com/hoob3rt/lualine.nvim/issues/281
+  " Plug 'hoob3rt/lualine.nvim'
+
   Plug 'vim-airline/vim-airline' "{{{
     let g:airline#extensions#tabline#enabled = 1
     let g:airline#extensions#vista#enabled = 0
@@ -760,6 +763,36 @@ require('lightspeed').setup {
 }
 
 require('gitsigns').setup()
+
+--require'lualine'.setup {
+--  options = {
+--    icons_enabled = true,
+--    theme = 'nord',
+--    component_separators = {'', ''},
+--    section_separators = {'', ''},
+--    disabled_filetypes = {}
+--  },
+--  sections = {
+--    lualine_a = {'mode'},
+--    lualine_b = {'branch'},
+--    lualine_c = {'filename'},
+--    lualine_x = {'encoding', 'filetype'},
+--    --lualine_x = {'encoding', 'fileformat', 'filetype'},
+--    lualine_y = {'hostname'},
+--    --lualine_y = {'diagnostics'},
+--    lualine_z = {'location'}
+--  },
+--  inactive_sections = {
+--    lualine_a = {},
+--    lualine_b = {},
+--    lualine_c = {'filename'},
+--    lualine_x = {'location'},
+--    lualine_y = {},
+--    lualine_z = {}
+--  },
+--  tabline = {},
+--  extensions = {}
+--}
 
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 vim.g.nvim_tree_bindings = {
