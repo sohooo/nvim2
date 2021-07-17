@@ -406,12 +406,12 @@
 
   Plug 'folke/which-key.nvim'
 
-  Plug 'liuchengxu/vista.vim' ", { 'on': 'Vista' } "{{{
+  Plug 'liuchengxu/vista.vim', { 'on': 'Vista' } "{{{
     " Viewer & Finder for LSP symbols and tags
     let g:vista#renderer#enable_icon = 0
     nnoremap <leader>tt :Vista nvim_lsp<cr>
   "}}}
-
+"}}}
 
 " addons, layout {{{
   Plug 'oberblastmeister/termwrapper.nvim' "{{{
@@ -438,7 +438,7 @@
     " nnoremap <leader>c :DiffviewOpen<CR>
   "}}}
 
-  Plug 'kyazdani42/nvim-tree.lua', { 'on': 'NvimTreeToggle' } "{{{
+	Plug 'kyazdani42/nvim-tree.lua' "{{{
     let g:nvim_tree_git_hl = 1 "0 by default, will enable file highlight for git attributes (can be used without the icons).
     let g:nvim_tree_indent_markers = 1 "0 by default, this option shows indent markers when folders are open
     let g:nvim_tree_follow = 1 "0 by default, this option allows the cursor to be updated when entering a buffer
@@ -508,6 +508,7 @@
 
   Plug 'vim-airline/vim-airline' "{{{
     let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#vista#enabled = 0
     let g:airline_theme='iceberg'
     let g:airline_powerline_fonts=0
     if !exists('g:airline_powerline_fonts')
@@ -561,9 +562,12 @@
   Plug 'kristijanhusak/vim-hybrid-material'           " hybrid_material
   Plug 'sainnhe/gruvbox-material'
   Plug 'sainnhe/sonokai'
+
+  " require termguicolors
+  " Plug 'folke/tokyonight.nvim'
 " }}}
 
-" disctraction-free writing {{{
+" distraction-free writing {{{
   nmap <leader>w :Goyo<CR>
   Plug 'junegunn/goyo.vim' "{{{
     function! s:goyo_enter()
@@ -754,6 +758,16 @@ require('lightspeed').setup {
   cycle_group_bwd_key = nil,
 }
 
+
+local tree_cb = require'nvim-tree.config'.nvim_tree_callback
+vim.g.nvim_tree_bindings = {
+	{ key = "s", cb = tree_cb("vsplit") },
+	{ key = "i", cb = tree_cb("split") },
+	{ key = "t", cb = tree_cb("tabnew") },
+  { key = "?", cb = tree_cb("toggle_help") },
+
+}
+
 EOF
 " }}}
 
@@ -781,12 +795,12 @@ EOF
   highlight LspDiagnosticsDefaultHint ctermfg=grey guifg=red
 " }}}
 
+" utils {{{
   " automatically show diagnostics on cursor pos.
   " autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
   " autocmd CursorHold * :Lspsaga show_line_diagnostics
   " autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()
 
-" utils {{{
   " whitespace handling
   highlight ExtraWhitespace ctermbg=red guibg=red
   match ExtraWhitespace /\s\+$/
