@@ -79,6 +79,7 @@
   set wrap               " turn on line wrapping
   set inccommand=split   " show regular expression previews
   set numberwidth=4      " width of line numbers
+  set signcolumn=auto:3  " space for lsp & git signs
   set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
   set fillchars=diff:⣿,vert:│
   set wildignore+=*.pyc,*.cache,*.min.*,*/.git/**/*,*/node_modules/**/*,*.swp,*.bak
@@ -489,7 +490,7 @@
 "}}}
 
 " visuals {{{
-  Plug 'airblade/vim-gitgutter'
+  Plug 'lewis6991/gitsigns.nvim'
   " Plug 'ryanoasis/vim-devicons'
   " Plug 'kyazdani42/nvim-web-devicons' "lua fork of vim-web-devicons for neovim; no hook for nerdtree
   Plug 'p00f/nvim-ts-rainbow' "🌈 Rainbow parentheses for neovim using tree-sitter
@@ -758,6 +759,7 @@ require('lightspeed').setup {
   cycle_group_bwd_key = nil,
 }
 
+require('gitsigns').setup()
 
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 vim.g.nvim_tree_bindings = {
@@ -818,7 +820,7 @@ EOF
       set eventignore=""
     else
       let g:lens#disabled = 1
-      set signcolumn=no
+      set signcolumn=auto:3
       silent! GitGutterDisable
       silent! DiffviewOpen
       set eventignore=BufEnter,BufLeave
