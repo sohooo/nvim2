@@ -23,8 +23,8 @@ system(vim, '--startuptime', LOG, '-c', 'q')
 # detect plugin manager
 plug_dir=""
 if File.directory? File.join(VIMFILES_DIR, 'plugged')
-  puts "vim-plug has been detected."
-  plug_dir="plugged"
+    puts "vim-plug has been detected."
+    plug_dir="plugged"
 elsif File.directory? File.join(VIMFILES_DIR, 'bundle')
   puts "NeoBundle/Vundle/Pathogen has been detected."
   plug_dir="bundle"

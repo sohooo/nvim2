@@ -566,6 +566,20 @@
   Plug 'kristijanhusak/vim-hybrid-material'           " hybrid_material
   Plug 'sainnhe/gruvbox-material'
   Plug 'sainnhe/sonokai'
+  Plug 'marko-cerovac/material.nvim'
+
+  Plug 'shaunsingh/moonlight.nvim' " {{{
+    " let g:moonlight_italic_comments = true
+    " let g:moonlight_italic_keywords = true
+    " let g:moonlight_italic_functions = true
+    " let g:moonlight_italic_variables = false
+    " let g:moonlight_contrast = true
+    " let g:moonlight_borders = false
+    " let g:moonlight_disable_background = false
+  "}}}
+
+  " FIXME: error on load?
+  " Plug 'shaunsingh/nord.nvim'
 
   " require termguicolors
   " Plug 'folke/tokyonight.nvim'
@@ -767,7 +781,7 @@ require('gitsigns').setup()
 --require'lualine'.setup {
 --  options = {
 --    icons_enabled = true,
---    theme = 'nord',
+--    theme = 'nord',  -- moonlight
 --    component_separators = {'', ''},
 --    section_separators = {'', ''},
 --    disabled_filetypes = {}
@@ -813,6 +827,8 @@ EOF
   if s:is_unix && !s:is_macvim
     if $TERM == 'xterm-256color'
       colorscheme iceberg
+      " colorscheme material
+      " colorscheme moonlight
       " colorscheme hybrid
       " colorscheme hybrid_material
     else
