@@ -276,7 +276,7 @@
   nnoremap <space>th <cmd>Telescope help_tags<cr>
   nnoremap <space>ta <cmd>Telescope tags<cr>
   nnoremap <space>to <cmd>TodoTelescope<cr>
-  nnoremap <leader><space> <cmd>Telescope current_buffer_fuzzy_find sorting_strategy=ascending prompt_position=top<cr>
+  nnoremap <leader><space> <cmd>Telescope current_buffer_fuzzy_find sorting_strategy=ascending<cr>
 " }}}
 
 " LSP setup {{{
@@ -304,7 +304,6 @@
   Plug 'sheerun/vim-polyglot'
   Plug 'ekalinin/Dockerfile.vim'
   Plug 'hail2u/vim-css3-syntax'
-  Plug 'ap/vim-css-color'
 "}}}
 
 " autocompletion, snippets {{{
@@ -490,6 +489,7 @@
 "}}}
 
 " visuals {{{
+  Plug 'RRethy/vim-illuminate'
   Plug 'lewis6991/gitsigns.nvim'
   " Plug 'ryanoasis/vim-devicons'
   " Plug 'kyazdani42/nvim-web-devicons' "lua fork of vim-web-devicons for neovim; no hook for nerdtree
