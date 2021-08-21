@@ -267,6 +267,7 @@
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+  Plug 'nvim-telescope/telescope-symbols.nvim'
 
   " Find files using Telescope command-line sugar.
 	nnoremap <space>f <cmd>Telescope find_files<cr>
