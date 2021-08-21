@@ -509,20 +509,8 @@
     let g:gitblame_message_template = ' <author> • <date> • <summary>'
   " }}}
 
-  " FIXME: aktivieren nach https://github.com/hoob3rt/lualine.nvim/issues/281
-  " Plug 'hoob3rt/lualine.nvim'
-
-  Plug 'vim-airline/vim-airline' "{{{
-    let g:airline#extensions#tabline#enabled = 1
-    let g:airline#extensions#vista#enabled = 0
-    let g:airline_theme='iceberg'
-    let g:airline_powerline_fonts=0
-    if !exists('g:airline_powerline_fonts')
-      " Use the default set of separators with a few customizations
-      let g:airline_left_sep='›'  " Slightly fancier than '>'
-      let g:airline_right_sep='‹' " Slightly fancier than '<'
-    endif
-  "}}}
+  Plug 'hoob3rt/lualine.nvim'
+  Plug 'kdheepak/tabline.nvim'
 
   Plug 'camspiers/lens.vim' "{{{
     " let g:lens#disabled = 1
@@ -780,35 +768,48 @@ require('lightspeed').setup {
 
 require('gitsigns').setup()
 
---require'lualine'.setup {
---  options = {
---    icons_enabled = true,
---    theme = 'nord',  -- moonlight
---    component_separators = {'', ''},
---    section_separators = {'', ''},
---    disabled_filetypes = {}
---  },
---  sections = {
---    lualine_a = {'mode'},
---    lualine_b = {'branch'},
---    lualine_c = {'filename'},
---    lualine_x = {'encoding', 'filetype'},
---    --lualine_x = {'encoding', 'fileformat', 'filetype'},
---    lualine_y = {'hostname'},
---    --lualine_y = {'diagnostics'},
---    lualine_z = {'location'}
---  },
---  inactive_sections = {
---    lualine_a = {},
---    lualine_b = {},
---    lualine_c = {'filename'},
---    lualine_x = {'location'},
---    lualine_y = {},
---    lualine_z = {}
---  },
---  tabline = {},
---  extensions = {}
---}
+require'lualine'.setup {
+  options = {
+    icons_enabled = true,
+    theme = 'nord',  -- moonlight
+    component_separators = {'', ''},
+    section_separators = {'', ''},
+    disabled_filetypes = {}
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch'},
+    lualine_c = {'filename'},
+    lualine_x = {'encoding', 'filetype'},
+    --lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'hostname'},
+    --lualine_y = {'diagnostics'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  extensions = {}
+}
+require'tabline'.setup {
+  -- Defaults configuration options
+  enable = true,
+  options = {
+  -- If lualine is installed tabline will use separators configured in lualine by default.
+  -- These options can be used to override those settings.
+  --section_separators = {'', ''},
+  section_separators = {'', ''},
+  component_separators = {'', ''},
+  max_bufferline_percent = 66, -- set to nil by default, and it uses vim.o.columns * 2/3
+  always_show_tabs = false, -- by default, this shows tabs only when there are more than one tab or if the first tab is named
+  }
+}
 
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 vim.g.nvim_tree_bindings = {
