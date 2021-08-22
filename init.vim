@@ -311,6 +311,7 @@
 
 " autocompletion, snippets {{{
 	Plug 'rafamadriz/friendly-snippets'
+  Plug 'hrsh7th/vim-vsnip-integ'
 	Plug 'hrsh7th/vim-vsnip' "{{{
 		" bindings: ctrl-p|n to select, ctrl-j|l to expand; (s-)tab to jump
 		" Expand
