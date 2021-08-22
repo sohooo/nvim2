@@ -60,7 +60,8 @@ Here's a list of some useful keyboard bindings. To get an overview and search tr
 * `gr`   rename element
 * `gd`   preview definition
 * `gs`   show signatur help
-* `<space> h`   show line diagnostics
+* `<space> h` show line diagnostics
+* `ctrl-n|p` jump to next|previous lsp diagnostics
 * `,s`   fix **s**tyle (format) current file
 
 
