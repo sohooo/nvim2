@@ -28,6 +28,7 @@
 " This config can be found at: https://github.com/sohooo/nvim2
 " The setup is also heavily inspired by the following:
 "   - https://github.com/sohooo/dotvim2
+"   - Vim Configs: folke
 "   - Youtube: ThePrimeagen
 "
 " }}}
@@ -227,7 +228,8 @@
   " Getting out of the terminal insert mode.
   tnoremap <Esc><Esc> <C-\><C-n>
   " nnoremap <leader>te :sp<Cr>:terminal<Cr>a  " classic terminal
-  nnoremap <leader>te :Ttoggle<cr>             " termwrapper plugin
+  " termwrapper plugin
+  nnoremap <leader>te :Ttoggle<cr>
 
   " toggle paste mode on/off
   map <F9> :set paste!<cr>:set paste?<cr>
@@ -794,7 +796,14 @@ require'lualine'.setup {
     lualine_y = {},
     lualine_z = {}
   },
-  tabline = {},
+  tabline = {
+    --lualine_a = {},
+    --lualine_b = {},
+    --lualine_c = { require'tabline'.tabline_buffers },
+    --lualine_x = { require'tabline'.tabline_tabs },
+    --lualine_y = {},
+    --lualine_z = {},
+  },
   extensions = {}
 }
 require'tabline'.setup {
