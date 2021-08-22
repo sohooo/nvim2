@@ -438,11 +438,6 @@
 
   Plug 'christoomey/vim-tmux-navigator' "Seamless navigation between tmux panes and vim splits
 
-  Plug 'sindrets/diffview.nvim', { 'on': 'DiffviewOpen' } "{{{
-    "Single tabpage interface to easily cycle through diffs for all modified files for any git rev.
-    " nnoremap <leader>c :DiffviewOpen<CR>
-  "}}}
-
 	Plug 'kyazdani42/nvim-tree.lua' "{{{
     let g:nvim_tree_git_hl = 1 "0 by default, will enable file highlight for git attributes (can be used without the icons).
     let g:nvim_tree_indent_markers = 1 "0 by default, this option shows indent markers when folders are open
@@ -872,24 +867,6 @@ EOF
   autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
   autocmd InsertLeave * match ExtraWhitespace /\s\+$/
   autocmd BufWinLeave * call clearmatches()
-
-  function! ToggleDiffviewBehaviour()
-    if bufexists(bufname('DiffviewFiles'))
-      let g:lens#disabled = 0
-      set signcolumn=auto
-      silent! GitGutterEnable
-      silent! DiffviewClose
-      set eventignore=""
-    else
-      let g:lens#disabled = 1
-      set signcolumn=auto:3
-      silent! GitGutterDisable
-      silent! DiffviewOpen
-      set eventignore=BufEnter,BufLeave
-      :normal <C-w>=
-    endif
-  endfunction
-  nnoremap <leader>c :call ToggleDiffviewBehaviour()<cr>
 
   function! ReformatThisBuffer()
     " :normal gggqG

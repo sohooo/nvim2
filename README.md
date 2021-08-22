@@ -72,7 +72,6 @@ Here's a list of some useful keyboard bindings. To get an overview and search tr
 * `,d`      toggle nvim-tree; [bindings](https://github.com/kyazdani42/nvim-tree.lua#keybindings)
 * `,u`      toggle UndoTree
 * `,tr`     toggle Trouble diagnostics
-* `,c`      toggle DiffView
 * `,w`      toggle distraction-free writing
 * `gcc`     toggle comment on/off
 * `kj`      remap of ESC
@@ -92,8 +91,13 @@ Here's a list of some useful keyboard bindings. To get an overview and search tr
 
 ### Fugitive
 
+Browse the git histroy with style. [Docs](https://github.com/tpope/vim-fugitive), [screencast](http://vimcasts.org/episodes/fugitive-vim-exploring-the-history-of-a-git-repository/).
+
 * `:Gdiff`    show diff
 * `:Gstatus`  toggle files with `-`
+* `:Glog -- %` load all commits which touched current file to quickfix list
+* `:Glog --grep=findme` search for 'findme' in all ancestral commit messages
+* `:Glog -Sfindme` search for 'findme' in the diff
 
 
 ## Workflows
