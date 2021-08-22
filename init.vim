@@ -201,14 +201,18 @@
   imap <F1> <Esc>
 
   " for the lazy: remap escape
-  imap kj <Esc>
+  inoremap kj <Esc>
+  inoremap jk <Esc>
   " Make line completion easier
-  imap <C-l> <C-x><C-l>
+  inoremap <C-l> <C-x><C-l>
 
   " switch buffers with tab
   nnoremap <tab>   :bnext<cr>
   nnoremap <S-tab> :bprevious<cr>
 
+  " thx prime: https://youtu.be/hSHATqh8svM
+  " make Y behave like other capitals
+  nnoremap Y yg_
   " keep the cursor in place while joining limes
   nnoremap J mzJ`z
   " keep search matches in the middle of the window.
@@ -217,6 +221,19 @@
   " same when jumping around
   nnoremap g; g;zz
   nnoremap g, g,zz
+  " undo breakpoints
+  " inoremap , ,<c-g>u
+  " inoremap . .<c-g>u
+  " inoremap ! !<c-g>u
+  " inoremap ? ?<c-g>u
+  " inoremap [ [<c-g>u
+  " move lines with +|-
+  " vnoremap - :m '>+1<cr>gv=gv
+  " vnoremap + :m '<-2<cr>gv=gv
+
+  " change word with cn or cN; go next with '.'
+  nnoremap cn *``cgn
+  nnoremap cN *``cgN
 
   " close those windows
   nnoremap cl :pclose \| lclose \| cclose<cr>
@@ -252,8 +269,6 @@
   " same indent behaviour in visual mode
   vmap > >gv
   vmap < <gv
-  " make Y behave like other capitals
-  map Y y$
 
   " improve up/down movement on wrapped lines
   nnoremap j gj
