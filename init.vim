@@ -435,6 +435,9 @@
   "   noremap g# g#<Cmd>lua require('hlslens').start()<CR>
   " "}}}
 
+  Plug 'TimUntersberger/neogit' "{{{
+    noremap <leader>c <Cmd>Neogit<CR>
+  "}}}
 
   Plug 'christoomey/vim-tmux-navigator' "Seamless navigation between tmux panes and vim splits
 
@@ -495,7 +498,6 @@
   " Plug 'kyazdani42/nvim-web-devicons' "lua fork of vim-web-devicons for neovim; no hook for nerdtree
   Plug 'p00f/nvim-ts-rainbow' "🌈 Rainbow parentheses for neovim using tree-sitter
   Plug 'kshenoy/vim-signature' "Plugin to toggle, display and navigate marks
-  " Plug 'glepnir/indent-guides.nvim' " throws: error executing vim.schedule lua callback: vim:e803: id not found: 34
   Plug 'folke/lsp-colors.nvim'
   Plug 'lukas-reineke/indent-blankline.nvim' "{{{
     let g:indent_blankline_use_treesitter = v:true
@@ -520,29 +522,6 @@
     " let g:lens#width_resize_min = 20
   "}}}
 
-"}}}
-
-" disabled for now {{{
-  " Plug 'jeffkreeftmeijer/vim-numbertoggle' "Toggles between hybrid and absolute line numbers automatically
-  " Plug 'dstein64/nvim-scrollview' "A Neovim plugin that displays interactive scrollbars.
-  " Plug 'npxbr/glow.nvim' "A markdown preview directly in your neovim.
-  " Plug 'nvim-telescope/telescope-project.nvim'
-  " Plug 'fhill2/telescope-ultisnips.nvim'
-  " Plug 'romgrk/barbar.nvim' "A neovim tabline plugin.
-  " Plug 'kdheepak/lazygit.nvim' "Plugin for calling lazygit from within neovim.
-  " Plug 'windwp/nvim-spectre' "Find the enemy and replace them with dark power.
-  " Plug 'nacro90/numb.nvim' "Peek lines just when you intend
-  " Plug 'kevinhwang91/nvim-hlslens' "Hlsearch Lens for Neovim
-  " Plug 'chaoren/vim-wordmotion' "More useful word motions for Vim
-  " Plug 'tpope/vim-abolish' "abolish.vim: easily search for, substitute, and abbreviate multiple variants of a word
-  " Plug 'tpope/vim-capslock' "capslock.vim: Software caps lock
-  " Plug 'airblade/vim-rooter' "Changes Vim working directory to project root.
-  " Plug 'tpope/vim-dispatch' "Asynchronous build and test dispatcher
-  " Plug 'karb94/neoscroll.nvim' "Smooth scrolling neovim plugin written in lua
-  " Plug 'lambdalisue/suda.vim' "🥪 An alternative sudo.vim for Vim and Neovim, limited support sudo in Windows
-  " Plug 'numtostr/FTerm.nvim' "🔥 No-nonsense floating terminal written in lua 🔥
-  " Plug 'wfxr/minimap.vim' "📡 Blazing fast minimap / scrollbar for vim, powered by code-minimap written in Rust.
-  " Plug 'ludovicchabant/vim-gutentags' "A Vim plugin that manages your tag files
 "}}}
 
 " colorschemes {{{
@@ -747,6 +726,16 @@ require('termwrapper').setup {
   -- opens a window in the bottom
   open_new_toggle = true, -- open a new terminal if the toggle target does not exist
   log = 1, -- 1 = warning, 2 = info, 3 = debug
+}
+
+require('neogit').setup{
+  mappings = {
+    -- modify status buffer mappings
+    status = {
+      ["o"] = "Toggle",
+      ["<space>"] = "Toggle",
+    }
+  }
 }
 
 require('lightspeed').setup {

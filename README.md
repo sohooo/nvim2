@@ -17,6 +17,7 @@ This setup is based on various sources all around github. Huge credits go to the
 - trailing whitespace on save are automatically removed
 - regex commands (like search/replace) with live preview
 - smart text objects: select text, then use `.` to enlage selection
+- manage git repo with [neogit](https://github.com/TimUntersberger/neogit)
 - collab editing with [instant](https://github.com/jbyuki/instant.nvim)
 - [which-key](https://github.com/folke/which-key.nvim): displays a popup with possible keybindings of the command you started typing
 
@@ -75,6 +76,7 @@ Here's a list of some useful keyboard bindings. To get an overview and search tr
 * `,tr`     toggle Trouble diagnostics
 * `,w`      toggle distraction-free writing
 * `gcc`     toggle comment on/off
+* `,c`      open Neogit
 * `kj`      remap of ESC
 * `<space> l` clear search highlight
 * `F9`      toggle paste/nopaste
