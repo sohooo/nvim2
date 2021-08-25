@@ -294,7 +294,9 @@
   nnoremap <space>th <cmd>Telescope help_tags<cr>
   nnoremap <space>ta <cmd>Telescope tags<cr>
   nnoremap <space>to <cmd>TodoTelescope<cr>
-  nnoremap <leader><space> <cmd>Telescope current_buffer_fuzzy_find sorting_strategy=ascending<cr>
+  nnoremap <space>td <cmd>Telescope lsp_workspace_diagnostics<cr>
+  "nnoremap <leader><space> <cmd>Telescope current_buffer_fuzzy_find sorting_strategy=ascending<cr>
+  nnoremap <leader><space> <cmd>Telescope current_buffer_fuzzy_find<cr>
 " }}}
 
 " LSP setup {{{
@@ -313,7 +315,9 @@
     xnoremap <silent> ga    <cmd>Lspsaga range_code_action<CR>
     nnoremap <silent> gs    <cmd>Lspsaga signature_help<CR>
 
+
     " also lsp, but not lspsaga
+    " nnoremap <space> e <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>
     nnoremap <leader>s gggqG \| <cmd>lua vim.lsp.buf.formatting()<cr>
   "}}}
 " }}}
@@ -692,11 +696,19 @@ require'lspconfig'.solargraph.setup {
 -- hide diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = false,
+    --virtual_text = false,
+    virtual_text = {
+      spacing = 4,
+      severity_limit = 'Warning',
+    },
     underline = false,
     signs = true, -- signs customized below
   }
 )
+
+-- automatically show lsp popup on hover
+-- vim.o.updatetime = 250
+-- vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false})]]
 
 -- require('lspsaga').init_lsp_saga()
 require('lspsaga').init_lsp_saga {
