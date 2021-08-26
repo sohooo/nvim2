@@ -739,8 +739,6 @@ doc_scroll_up = function(default_key)
   end
 end
 
--- require('indent_guides').setup({ })
-
 require('lspkind').init({})
 
 require('termwrapper').setup {
@@ -846,22 +844,7 @@ EOF
 
 " color settings {{{
   set background=dark
-
-  " conditionally set colorscheme
-  if s:is_unix && !s:is_macvim
-    if $TERM == 'xterm-256color'
-      colorscheme iceberg
-      " colorscheme material
-      " colorscheme moonlight
-      " colorscheme hybrid
-      " colorscheme hybrid_material
-    else
-      let g:CSApprox_verbose_level=0
-      colorscheme slate
-    endif
-  else
-    colorscheme iceberg
-  endif
+  colorscheme iceberg
 
   " colorize lsp diag messages
   highlight LspDiagnosticsDefaultError ctermfg=red guifg=red
