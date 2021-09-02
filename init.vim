@@ -577,7 +577,7 @@
 
 " distraction-free writing {{{
   nmap <leader>w :Goyo<CR>
-  Plug 'junegunn/goyo.vim' "{{{
+  Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } "{{{
     function! s:goyo_enter()
       silent !tmux set status off
       set noshowmode
@@ -599,7 +599,7 @@
     autocmd  User GoyoEnter nested call <SID>goyo_enter()
     autocmd  User GoyoLeave nested call <SID>goyo_leave()
   "}}}
-  Plug 'junegunn/limelight.vim' "{{{
+  Plug 'junegunn/limelight.vim', { 'on': 'Goyo' } "{{{
     let g:limelight_default_coefficient = 0.7
   "}}}
 " }}}
