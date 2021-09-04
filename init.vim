@@ -556,20 +556,27 @@
   Plug 'kristijanhusak/vim-hybrid-material'           " hybrid_material
   Plug 'sainnhe/gruvbox-material'
   Plug 'sainnhe/sonokai'
-  Plug 'marko-cerovac/material.nvim'
 
-  Plug 'shaunsingh/moonlight.nvim' " {{{
-    " let g:moonlight_italic_comments = true
-    " let g:moonlight_italic_keywords = true
-    " let g:moonlight_italic_functions = true
-    " let g:moonlight_italic_variables = false
-    " let g:moonlight_contrast = true
-    " let g:moonlight_borders = false
-    " let g:moonlight_disable_background = false
+  Plug 'marko-cerovac/material.nvim' "{{{
+    let g:material_style = 'darker'
   "}}}
 
-  " FIXME: error on load?
-  " Plug 'shaunsingh/nord.nvim'
+  Plug 'shaunsingh/moonlight.nvim' " {{{
+    let g:moonlight_italic_comments = v:true
+    " let g:moonlight_italic_keywords = v:true
+    let g:moonlight_italic_functions = v:true
+    let g:moonlight_italic_variables = v:false
+    let g:moonlight_contrast = v:true
+    let g:moonlight_borders = v:false
+    let g:moonlight_disable_background = v:false
+  "}}}
+
+  Plug 'shaunsingh/nord.nvim' "{{{
+    let g:nord_contrast = v:true
+    let g:nord_borders = v:false
+    let g:nord_disable_background = v:false
+    let g:nord_italic = v:true
+  "}}}
 
   " require termguicolors
   " Plug 'folke/tokyonight.nvim'
@@ -754,18 +761,8 @@ require('lspsaga').init_lsp_saga {
     warn_sign = "◆",
     hint_sign = "○",
     infor_sign = "◇",
-
-    -- override ugly vim.lsp arrow icon
-    --error_sign = '', -- 
-    --warn_sign = '',
-    --hint_sign = '',
-    --infor_sign = '',
-
-    -- non-patched font variant
-    --error_sign = "ⓧ",
-    --warn_sign = "⚠",
-    --hint_sign = "ⓘ",
-    --infor_sign = "ⓘ",
+    dianostic_header_icon = ' ',
+    code_action_icon = ' ',
 }
 
 doc_scroll_up = function(default_key)
@@ -821,7 +818,7 @@ require('gitsigns').setup()
 require'lualine'.setup {
   options = {
     icons_enabled = true,
-    theme = 'nord',  -- moonlight
+    theme = 'nord',  -- moonlight | material-nvim | nord
     component_separators = {'', ''},
     section_separators = {'', ''},
     disabled_filetypes = {}
@@ -854,17 +851,18 @@ require'lualine'.setup {
   },
   extensions = {}
 }
+
 require'tabline'.setup {
   -- Defaults configuration options
   enable = true,
   options = {
-  -- If lualine is installed tabline will use separators configured in lualine by default.
-  -- These options can be used to override those settings.
-  --section_separators = {'', ''},
-  section_separators = {'', ''},
-  component_separators = {'', ''},
-  max_bufferline_percent = 66, -- set to nil by default, and it uses vim.o.columns * 2/3
-  always_show_tabs = false, -- by default, this shows tabs only when there are more than one tab or if the first tab is named
+    -- If lualine is installed tabline will use separators configured in lualine by default.
+    -- These options can be used to override those settings.
+    --section_separators = {'', ''},
+    section_separators = {'', ''},
+    component_separators = {'', ''},
+    max_bufferline_percent = 66, -- set to nil by default, and it uses vim.o.columns * 2/3
+    always_show_tabs = false, -- by default, this shows tabs only when there are more than one tab or if the first tab is named
   }
 }
 
@@ -874,7 +872,6 @@ vim.g.nvim_tree_bindings = {
 	{ key = "i", cb = tree_cb("split") },
 	{ key = "t", cb = tree_cb("tabnew") },
   { key = "?", cb = tree_cb("toggle_help") },
-
 }
 
 EOF
@@ -882,7 +879,7 @@ EOF
 
 " color settings {{{
   set background=dark
-  colorscheme iceberg
+  colorscheme nord
 
   " colorize lsp diag messages
   highlight LspDiagnosticsDefaultError ctermfg=red guifg=red
@@ -936,5 +933,6 @@ EOF
   "   " autocmd BufEnter,FocusGained,InsertLeave * set nu rnu
   "   " autocmd BufLeave,FocusLost,InsertEnter   * set nonu nornu
   " augroup END
+  colorscheme iceberg
 " }}}
 
