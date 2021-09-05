@@ -22,6 +22,12 @@ class Test
 end
 
 # TODO: this is fun
+# this is a long long comment, just to test the colorscheme
+# and syntax highlighting.
+#
+#     # test some stuff
+#     t = Test.new
+#     t.funky_stuff
 t = Test.new
 t.funky_stuff
 t.test

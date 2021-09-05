@@ -37,13 +37,13 @@ Here's a list of some useful keyboard bindings. To get an overview and search tr
 
 ### Finding stuff with Telescope
 
-* `<space> f` find_files
-* `<space> g` git_files
-* `<space> s` live_grep ("search")
-* `<space> b` buffers
-* `<space> ta` tags
-* `<space> th` help_tags
-* `<space> to` todos
+* `<leader> f` git_files || find_files
+* `<leader> g` git_files
+* `<leader> s` live_grep ("search")
+* `<leader> b` buffers
+* `<leader> ta` tags
+* `<leader> th` help_tags
+* `<leader> to` todos
 * `<leader><space>` find in current buffer
 
 [Telescope bindings](https://github.com/nvim-telescope/telescope.nvim#mappings) to select/open files (same for nvim-tree):
@@ -68,7 +68,7 @@ Here's a list of some useful keyboard bindings. To get an overview and search tr
 
 ### Movement and others
 
-* `tab, S-tab` switch buffers
+* `tab, S-tab` switch buffers (close with `,q`)
 * `s`       [lightspeed.nvim](https://github.com/ggandor/lightspeed.nvim);  like 'f', but multiple lines; `sab`
 * `,a =`    align line/selection
 * `,d`      toggle nvim-tree; [bindings](https://github.com/kyazdani42/nvim-tree.lua#keybindings)

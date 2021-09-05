@@ -200,6 +200,7 @@
   map <F1> <Esc>
   imap <F1> <Esc>
 
+
   " for the lazy: remap escape
   inoremap kj <Esc>
   inoremap jk <Esc>
@@ -209,6 +210,7 @@
   " switch buffers with tab
   nnoremap <tab>   :bnext<cr>
   nnoremap <S-tab> :bprevious<cr>
+  nnoremap <leader>q :bd<cr>
 
   " thx prime: https://youtu.be/hSHATqh8svM
   " make Y behave like other capitals
@@ -287,14 +289,15 @@
   Plug 'nvim-telescope/telescope-symbols.nvim'
 
   " Find files using Telescope command-line sugar.
-	nnoremap <space>f <cmd>Telescope find_files<cr>
-	nnoremap <space>g <cmd>Telescope git_files<cr>
-  nnoremap <space>s <cmd>Telescope live_grep<cr>
-  nnoremap <space>b <cmd>Telescope buffers<cr>
-  nnoremap <space>th <cmd>Telescope help_tags<cr>
-  nnoremap <space>ta <cmd>Telescope tags<cr>
-  nnoremap <space>to <cmd>TodoTelescope<cr>
-  nnoremap <space>td <cmd>Telescope lsp_workspace_diagnostics<cr>
+	" nnoremap <space>f <cmd>Telescope find_files<cr>
+  nnoremap <leader>f <cmd>lua require('sohooo/telescope').project_files()<cr>
+	nnoremap <leader>g <cmd>Telescope git_files<cr>
+  nnoremap <leader>s <cmd>Telescope live_grep<cr>
+  nnoremap <leader>b <cmd>Telescope buffers<cr>
+  nnoremap <leader>th <cmd>Telescope help_tags<cr>
+  nnoremap <leader>ta <cmd>Telescope tags<cr>
+  nnoremap <leader>to <cmd>TodoTelescope<cr>
+  nnoremap <leader>td <cmd>Telescope lsp_workspace_diagnostics<cr>
   "nnoremap <leader><space> <cmd>Telescope current_buffer_fuzzy_find sorting_strategy=ascending<cr>
   nnoremap <leader><space> <cmd>Telescope current_buffer_fuzzy_find<cr>
 " }}}
@@ -567,13 +570,13 @@
     let g:moonlight_italic_functions = v:true
     let g:moonlight_italic_variables = v:false
     let g:moonlight_contrast = v:true
-    let g:moonlight_borders = v:false
+    let g:moonlight_borders = v:true
     let g:moonlight_disable_background = v:false
   "}}}
 
   Plug 'shaunsingh/nord.nvim' "{{{
-    let g:nord_contrast = v:true
-    let g:nord_borders = v:false
+    let g:nord_contrast = v:false
+    let g:nord_borders = v:true
     let g:nord_disable_background = v:false
     let g:nord_italic = v:true
   "}}}
@@ -617,263 +620,24 @@ syntax enable
 
 " lua config {{{
 lua << EOF
+require('sohooo/treesitter')
+require('sohooo/telescope')
+require('sohooo/lsp')
 
-require('nvim-treesitter.configs').setup {
-  -- https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
-  ensure_installed = { -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-    "bash",
-    "css",
-    "go",
-    "html",
-    "json",
-    "lua",
-    "php",
-    "python",
-    "ruby",
-    "rust",
-    "toml",
-    "yaml",
-  },
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-  },
-  rainbow = {
-    enable = true,
-    extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-    max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
-  },
-  textsubjects = {
-    enable = true,
-    keymaps = {
-      ['.'] = 'textsubjects-smart',
-    }
-  },
-  matchup = {
-    enable = true,              -- mandatory, false will disable the whole extension
-  }
-}
+require('sohooo/lightspeed')
+require('sohooo/lualine')
+require('sohooo/neogit')
+require('sohooo/nvim-tree')
+require('sohooo/termwrapper')
+require('sohooo/trouble')
 
+require('gitsigns').setup()
 require('nvim-autopairs').setup()
-
-require('which-key').setup {}
-
-require('telescope').setup {
-  color_devicons = false,
-}
+require('which-key').setup{}
 
 require('todo-comments').setup {
   signs = false
 }
-
-require("trouble").setup {
-  -- settings without a patched font or icons
-  fold_open = "v", -- icon used for open folds
-  fold_closed = ">", -- icon used for closed folds
-  indent_lines = false, -- add an indent guide below the fold icons
-  icons = false, -- requires nvim-web-devicons
-  signs = {
-      -- icons / text used for a diagnostic
-      error = "error",
-      warning = "warn",
-      hint = "hint",
-      information = "info"
-  },
-  use_lsp_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
-}
-
--- LSP settings
--- https://github.com/neovim/nvim-lspconfig
-local nvim_lsp = require('lspconfig')
-
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-  -- Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  -- Mappings.
-  local opts = { noremap=true, silent=true }
-
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  --buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts) -- jump back w/ <c-o>
-  --buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  --buf_set_keymap('n', 'gn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  --buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  --buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  --buf_set_keymap('n', '<c-n>', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  --buf_set_keymap('n', '<c-p>', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  --buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  --buf_set_keymap('n', '<leader>s', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-
-  --buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  --buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  --buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  --buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  --buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-
-  --buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  --buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  --buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-end
-
--- map buffer local keybindings when the language server attaches
--- ruby/solargraph
--- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#solargraph
-require'lspconfig'.solargraph.setup {
-  on_attach = on_attach,
-  settings = {
-    solargraph = {
-      autoformat = true,
-      formatting = true,
-      definitions = true,
-      hover = true,
-      logLevel = "warn",
-      rename = true,
-      symbols = true,
-    }
-  }
-}
---require'lspconfig'.bashls.setup{}
---require'lspconfig'.sorbet.setup{}
-
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    --virtual_text = false,
-    virtual_text = {
-      spacing = 4,
-      severity_limit = 'Warning',
-    },
-    underline = false,
-    signs = true, -- signs customized below
-  }
-)
-
--- automatically show lsp popup on hover
--- vim.o.updatetime = 250
--- vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false})]]
-
--- require('lspsaga').init_lsp_saga()
-require('lspsaga').init_lsp_saga {
-    error_sign = "✯",
-    warn_sign = "◆",
-    hint_sign = "○",
-    infor_sign = "◇",
-    dianostic_header_icon = ' ',
-    code_action_icon = ' ',
-}
-
-doc_scroll_up = function(default_key)
-  if require('lspsaga.hover').has_saga_hover() then
-    require('lspsaga.hover').smart_scroll_hover(-1)
-  else
-    local key = vim.api.nvim_replace_termcodes(default_key,true,false,true)
-    vim.fn.nvim_feedkeys(key,'n',true)
-  end
-end
-
-require('lspkind').init({})
-
-require('termwrapper').setup {
-  -- these are all of the defaults
-  open_autoinsert = true, -- autoinsert when opening
-  toggle_autoinsert = true, -- autoinsert when toggling
-  autoclose = true, -- autoclose, (no [Process exited 0])
-  winenter_autoinsert = false, -- autoinsert when entering the window
-  default_window_command = "belowright 13split", -- the default window command to run when none is specified,
-  -- opens a window in the bottom
-  open_new_toggle = true, -- open a new terminal if the toggle target does not exist
-  log = 1, -- 1 = warning, 2 = info, 3 = debug
-}
-
-require('neogit').setup{
-  mappings = {
-    -- modify status buffer mappings
-    status = {
-      ["o"] = "Toggle",
-      ["<space>"] = "Toggle",
-    }
-  }
-}
-
-require('lightspeed').setup {
-  jump_to_first_match = true,
-  jump_on_partial_input_safety_timeout = 400,
-  highlight_unique_chars = false,
-  grey_out_search_area = true,
-  match_only_the_start_of_same_char_seqs = true,
-  limit_ft_matches = 5,
-  full_inclusive_prefix_key = '<c-x>',
-  -- By default, the values of these will be decided at runtime,
-  -- based on `jump_to_first_match`
-  labels = nil,
-  cycle_group_fwd_key = nil,
-  cycle_group_bwd_key = nil,
-}
-
-require('gitsigns').setup()
-
-require'lualine'.setup {
-  options = {
-    icons_enabled = true,
-    theme = 'nord',  -- moonlight | material-nvim | nord
-    component_separators = {'', ''},
-    section_separators = {'', ''},
-    disabled_filetypes = {}
-  },
-  sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch'},
-    lualine_c = {'filename'},
-    lualine_x = {'encoding', 'filetype'},
-    --lualine_x = {'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'hostname'},
-    --lualine_y = {'diagnostics'},
-    lualine_z = {'location'}
-  },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
-    lualine_y = {},
-    lualine_z = {}
-  },
-  tabline = {
-    --lualine_a = {},
-    --lualine_b = {},
-    --lualine_c = { require'tabline'.tabline_buffers },
-    --lualine_x = { require'tabline'.tabline_tabs },
-    --lualine_y = {},
-    --lualine_z = {},
-  },
-  extensions = {}
-}
-
-require'tabline'.setup {
-  -- Defaults configuration options
-  enable = true,
-  options = {
-    -- If lualine is installed tabline will use separators configured in lualine by default.
-    -- These options can be used to override those settings.
-    --section_separators = {'', ''},
-    section_separators = {'', ''},
-    component_separators = {'', ''},
-    max_bufferline_percent = 66, -- set to nil by default, and it uses vim.o.columns * 2/3
-    always_show_tabs = false, -- by default, this shows tabs only when there are more than one tab or if the first tab is named
-  }
-}
-
-local tree_cb = require'nvim-tree.config'.nvim_tree_callback
-vim.g.nvim_tree_bindings = {
-	{ key = "s", cb = tree_cb("vsplit") },
-	{ key = "i", cb = tree_cb("split") },
-	{ key = "t", cb = tree_cb("tabnew") },
-  { key = "?", cb = tree_cb("toggle_help") },
-}
-
 EOF
 " }}}
 
