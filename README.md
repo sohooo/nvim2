@@ -24,9 +24,10 @@ This setup is based on various sources all around github. Huge credits go to the
 
 ## Installation
 
+0. Get current Neovim 0.6+ using your package manager of choice, or just grab the [AppImage](https://github.com/neovim/neovim/releases)
 1. Put this repo in a place you like, for example: `git clone http://github.com/sohooo/nvim2.git ~/.dotvim`
-2. Start Vim and install plugins: `vim -u ~/.dotvim/vimrc -c PlugInstall`
-3. Bonus: create an alias to use your Vim installation, like: `alias v='nvim -u ~/.dotvim/vimrc'`; this way, we don't interfere with the system Vim installation.
+2. Start Vim and install plugins: `nvim -u ~/.dotvim/init.vim -c PlugInstall`
+3. Bonus: create an alias to use your Vim installation, like: `alias nv='nvim -u ~/.dotvim/init.vim'`; this way, we don't interfere with the system Vim installation.
 4. Enjoy!
 
 
