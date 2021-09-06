@@ -307,7 +307,7 @@
 	Plug 'onsails/lspkind-nvim'
 	Plug 'neovim/nvim-lspconfig'
   Plug 'glepnir/lspsaga.nvim' "{{{
-    nnoremap <silent> gh    <cmd>Lspsaga lsp_finder<CR>
+    nnoremap <silent> gs    <cmd>Lspsaga lsp_finder<CR>
     nnoremap <silent> K     <cmd>Lspsaga hover_doc<CR>
     nnoremap <silent> <C-p> <cmd>Lspsaga diagnostic_jump_prev<CR>
     nnoremap <silent> <C-n> <cmd>Lspsaga diagnostic_jump_next<CR>
@@ -316,7 +316,7 @@
     nnoremap <space>  e     <cmd>Lspsaga show_line_diagnostics<CR>
     nnoremap <silent> ga    <cmd>Lspsaga code_action<CR>
     xnoremap <silent> ga    <cmd>Lspsaga range_code_action<CR>
-    nnoremap <silent> gs    <cmd>Lspsaga signature_help<CR>
+    nnoremap <silent> gh    <cmd>Lspsaga signature_help<CR>
 
     " scroll hover doc or scroll in definition preview
     nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
@@ -325,7 +325,7 @@
 
     " also lsp, but not lspsaga
     " nnoremap <space> e <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>
-    nnoremap <leader>s gggqG \| <cmd>lua vim.lsp.buf.formatting()<cr>
+    nnoremap <leader>s <cmd>lua vim.lsp.buf.formatting()<cr>
   "}}}
 " }}}
 
