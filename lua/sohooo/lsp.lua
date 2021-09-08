@@ -78,8 +78,8 @@ require('lspsaga').init_lsp_saga {
     warn_sign = "◆",
     hint_sign = "○",
     infor_sign = "◇",
-    dianostic_header_icon = ' ',
-    code_action_icon = ' ',
+    dianostic_header_icon = '> ',
+    code_action_icon = '> ',
 }
 
 doc_scroll_up = function(default_key)

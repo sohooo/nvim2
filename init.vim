@@ -630,14 +630,12 @@ require('sohooo/neogit')
 require('sohooo/nvim-tree')
 require('sohooo/termwrapper')
 require('sohooo/trouble')
+require('sohooo/todo-comments')
 
 require('gitsigns').setup()
 require('nvim-autopairs').setup()
 require('which-key').setup{}
 
-require('todo-comments').setup {
-  signs = false
-}
 EOF
 " }}}
 
